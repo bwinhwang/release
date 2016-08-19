@@ -1,0 +1,334 @@
+open:
+ROTOCI_NF_00005: tag_ptsw.sh
+ROTOCI_CN_00008: doubling of all svn commit-like commands
+ROTOCI_NF_00032: Further Automate Branch Creation and Deletion in PS
+
+ROTOCI_0.085
+IBPSINT1607011_09: incorrect mcuhwapi and dsphwapi version string within PSREL_versionstring.h
+
+ROTOCI_0.084:
+ROTOCI_CN_00134: ptsw_rel.sh: missing LFS_OS created from LFS_REL
+
+ROTOCI_0.083:
+ROTOCI_CN_00133: ps_rel.sh: create_psrel_versionstring: missing LFS_OS subsituted by LFS_REL
+
+ROTOCI_0.082:
+ROTOCI_CN_00132: ps_rel.sh, ps_wft.sh:  ECL_..._WCDMA added to BTS_PS_versionfile_ext.txt and baselines for xml
+
+ROTOCI_0.081:
+ROTOCI_CN_00131: ps_rel.sh: ECL_TI_CGT_WCDMA, ECL_OSECK_4_1_NY_WCDMA added to BTS_PS_versionfile.txt
+
+ROTOCI_0.080:
+ROTOCI_CN_00130: non-empty CI2RM/CI2RM_FastTrack creation during branching
+ROTOCI_CN_00129: new file rmjob.sh
+ROTOCI_CN_00128: cpjob.sh: error handling for wget inserted
+
+ROTOCI_0.079:
+ROTOCI_CN_00127: update xml schema version 11
+
+ROTOCI_0.078:
+ROTOCI_CN_00126: ps_rel.sh: cp CCS/TrblLogList/* to test_autom
+PR099724: LBT2675 Missing snapshot document files for CCS 
+
+ROTOCI_0.077:
+ROTOCI_CN_00125: ps_branch.sh: correction in create_wft_branch
+ROTOCI_CN_00124: env: new WFT key
+
+ROTOCI_0.076:
+ROTOCI_NF_00033: ECL removal from SW tags
+
+ROTOCI_0.075:
+ROTOCI_CN_00123: insert automatic creation and deletion of branch in WFT
+
+ROTOCI_0.074:
+ROTOCI_CN_00122: copy MCU TrblLog txt files to test_autom
+
+ROTOCI_0.073:
+ROTOCI_NF_00031: switch from yearly to monthly repos
+
+ROTOCI_0.072:
+ROTOCI_CN_00121: ps_wft.sh: %RB handling inserted
+ROTOCI_CN_00120: ps_branch.sh: remove branch before creation the new one
+
+ROTOCI_0.071:
+ROTOCI_CN_00119: ps_rel.sh: vcf generation for fsmr4 changed
+
+ROTOCI_0.070:
+ROTOCI_CN_00118: ps_rel.sh: symbolic link to trbl_log dereferenced
+
+ROTOCI_0.069:
+ROTOCI_CN_00117: ps_rel.sh: version_control.xml (combined from delivery of subcomponents) for all releases >= 2015_07
+
+ROTOCI_0.068:
+ROTOCI_CN_00116: ps_rel.sh: version_control.xml is now combined from delivery of subcomponents, previous version available in old_version_control.xml
+ROTOCI_CN_00115: ps_functions.sh: function findPsRelRepo_NEW added (in preparation for monthly D-Repo)
+ROTOCI_CN_00114: cpjob.sh: check of branch name removed
+ROTOCI_CN_00113: ps_clean.sh: mail_send added
+
+ROTOCI_0.067:
+ROTOCI_CN_00112: ptsw_rel.sh: ignore comments in xml before reading it
+ROTOCI_NF_00030: ps_merge.sh added (mirror of components)
+ROTOCI_CN_00112: ps_rel.sh: MCU content corrected in create_ptsw_fsmr4_vcf
+ROTOCI_CN_00111: ptsw_rel.sh: PNS handling removed
+
+ROTOCI_0.066:
+ROTOCI_CN_00110: tag_ps_rel.sh: insertion into platform DB added 
+ROTOCI_CN_00109: ps_rotoci_psrel.sh, ps_rel.sh: combined version_control inserted
+ROTOCI_CN_00108: ps_mirror.sh: revert ECL added
+ROTOCI_CN_00107: ptsw_rel.sh: repository_url, repository_branch added to WFT 
+
+ROTOCI_0.065:
+ROTOCI_CN_00105: cpjob.sh: now duplicates TEMPLATE not MAINBRANCH
+ROTOCI_CN_00106: update_glob_env.sh: patches >= 50 will be ignored
+ROTOCI_NF_00029: ps_mirror.sh: introduced  
+
+ROTOCI_0.064:
+ROTOCI_CN_00104: correction of fsmr4 vcf
+
+ROTOCI_0.063:
+ROTOCI_CN_00103: ptsw_flite_version_control.xml changed to ptsw_fsmr4_version_control.xml
+ROTOCI_CN_00102: interface change indication inserted
+
+ROTOCI_0.062:
+ROTOCI_CN_00101: xml releasenote version 10, xml template id 37 
+
+ROTOCI_0.061:
+ROTOCI_CN_00100: features in xml-file encapsulated in <module>
+ROTOCI_CN_00099: log information in prelog.sh improved
+
+ROTOCI_0.060:
+ROTOCI_NF_00028: branch source information within branch mail
+
+ROTOCI_0.059:
+ROTOCI_NF_00027: CCS T_Tools handling
+
+ROTOCI_0.058:
+PR 114799ESPE01: Duplicate entries in Platform's trbl_log_list
+ROTOCI_CN_00098: part list generation added
+
+ROTOCI_0.057:
+ROTOCI_CN_00097: YAFT packaging removed (create_binary_zip)
+ROTOCI_CN_00096: entries for LCP module removed from version_control.xml (create_vcf)
+
+ROTOCI_0.056:
+ROTOCI_CN_00095: calculation of D-Repo of LFS
+
+ROTOCI_0.055:
+ROTOCI_CN_00094: calc_ver_num based on unix time
+
+ROTOCI_0.054:
+PR 112355ESPE01: PS_REL versioning problem 
+
+ROTOCI_0.053:
+ROTOCI_CN_00093: date/time will be in xml now
+ROTOCI_CN_00092: prelog output extended for FZM and LSP
+
+ROTOCI_0.052:
+ROTOCI_CN_00091: old style of ci comment (READINESS: COMPLETED) code removed completely 
+ROTOCI_CN_00090: DSP testing flag reset for FB1304_DND30
+ROTOCI_CN_00089: function checkChanges improved
+
+ROTOCI_0.051:
+ROTOCI_CN_00088: old style of ci comment (READINESS: COMPLETED) no more supported
+ROTOCI_CN_00087: LFS_OS versions added to PSREL_versionstring.h
+ROTOCI_CN_00086: ECL_HDBDE added to ECL-file creation
+
+ROTOCI_0.050:
+ROTOCI_CN_00085: insert dummy to repositoryUrl, repositoryBranch, repositoryRevision of PSPIT xml-file (WFT v2.19)
+ROTOCI_CN_00084: insert parameters for "fast track"  
+ROTOCI_CN_00083: definition WFT_PORT: nokiasiemensnetworks to nsn
+
+ROTOCI_0.049:
+ROTOCI_CN_00082: yaft fixes
+
+ROTOCI_0.048:
+ROTOCI_CN_00079: specify tag <RepositoryRevision> in xml file
+ROTOCI_CN_00080: new: versions/version_control.xml
+ROTOCI_CN_00081: new: test_autom/trbl_log_list.csv
+
+ROTOCI_0.047:
+ROTOCI_NF_00026: ps_clean.sh: removing of closed branches
+
+ROTOCI_0.046:
+ROTOCI_CN_00078: DSPHWAPI renaming within vcf
+ROTOCI_CN_00077: ptsw_rel.sh: definition of type improved
+ROTOCI_CN_00076: tag_ps_rel.sh: ci comment for ECL_RP added
+ROTOCI_CN_00075: cpjob.sh: source_env inserted
+ROTOCI_CN_00074: improve speed for tar ball zip file generation, introduce FEP zip file generation
+
+ROTOCI_0.045:
+ROTOCI_CN_00073: LCP module added to version_control.xml
+
+ROTOCI_0.044:
+ROTOCI_CN_00072: handling of FZM baseline added
+
+ROTOCI_0.043:
+ROTOCI_CN_00069: improvement of removal of empty directories within ps_env
+ROTOCI_CN_00070: additional dsp information removed from Important Notes
+ROTOCI_CN_00071: content of repositoryUrl in xml file generation corrected
+
+ROTOCI_0.042:
+ROTOCI_NF_00025: combine CCS/CCS with DSPHWAPI/CCS
+ROTOCI_CN_00067: wget xml --no-check-certificate added
+ROTOCI_CN_00068: year switch for components
+
+ROTOCI_0.041:
+ROTOCI_CN_00065: nokiasiemensnetworks -> nsn
+ROTOCI_CN_00066: TI_KEPLER_PDK correction (auto_create, BTS_PS_versionfile.txt)  
+
+ROTOCI_0.040:
+ROTOCI_CN_00064: new entries in ECL and BTS_PS_versionfile for LRC identifiers 
+
+ROTOCI_0.039:
+ROTOCI_CN_00063: Jira checkin comments removed
+
+ROTOCI_0.038:
+ROTOCI_CN_00061: Adaptation to Releasenote Template V9 (xml_releasenote_id=33)
+ROTOCI_CN_00062: propset svn:keywords (HeadURL, ...) removed 
+
+ROTOCI_0.037:
+ROTOCI_CN_00060: RP path changed from ECL_PS_Smoking_Test to ECL_PS
+PR42258ESPE07: PS(CCS) and BM are not compatible 
+
+ROTOCI_0.036:
+ROTOCI_CN_00058: ps_branch.sh: pit flag handling removed
+ROTOCI_CN_00059: ps_rel.sh: function create_pit_file inserted
+
+ROTOCI_0.035:
+ROTOCI_CN_00057: PIT redesign
+
+ROTOCI_0.034:
+ROTOCI_CN_00056: deletion of pit and map from svn
+
+ROTOCI_0.033:
+ROTOCI_CN_00054: added module FCT for MCUHWAPI in vcf
+
+ROTOCI_0.032:
+ROTOCI_CN_00053: added module FSP for DSPHWAPI in vcf
+
+ROTOCI_0.031:
+ROTOCI_CN_00050: ECL_TI_KEPLER_PDK handling
+ROTOCI_CN_00051: in ps_branch parameter WFTBRANCHES now optional
+ROTOCI_CN_00052: LRC_LFS handling inserted
+
+ROTOCI_0.030:
+ROTOCI_CN_00047: Automatic creation of PS_LFS within WFT in case of no modifications of PS_REL
+ROTOCI_CN_00048: Correction of misleading svn ls output
+ROTOCI_CN_00049: Generic remove of ci- in ECL env variables
+ROTOCI_NF_00023: Generic versionstring extension to short term product branches
+ROTOCI_NF_00024: Generic RP handling
+
+ROTOCI_0.029:
+ROTOCI_NF_00022: Handing of MDn Branches and Releases
+
+ROTOCI_0.028:
+ROTOCI_NF_00021: Full generic ps_env generation
+
+ROTOCI_0.027:
+ROTOCI_CN_00042: ECL_PS_LFS_SDK3 handling added
+ROTOCI_CN_00043: info= removed from CN and NF handling
+ROTOCI_CN_00044: new parameter -p in ps_branch.sh
+ROTOCI_CN_00045: curl command for deletion of Important Note inserted
+ROTOCI_CN_00046: expansion for LRC/FZM in calc_ver_num, create_vcf
+
+ROTOCI_0.026:
+ROTOCI_CN_00040: Error handling for "svn cat" added, set -o pipefail
+ROTOCI_CN_00041: xml_releasenote_id=29 (version 8)
+
+ROTOCI_0.025:
+ROTOCI_NF_00017: K2 components added to BTS_PS_versionfile and to WFT
+ROTOCI_NF_00018: Extension to new commit syntax
+ROTOCI_NF_00019: Update to releasenote version 8
+ROTOCI_NF_00020: Support of Kepler within important note of dsp
+
+ROTOCI_0.024:
+ROTOCI_NF_00016: BTS_PS_versionfile_ext.txt added
+
+ROTOCI_0.023:
+ROTOCI_CN_00036: update in version_control.xml generation (requested by uRec)
+ROTOCI_CN_00037: extension for LRC components (ECL_BASE, triggerWft, BaselinesForXml)
+ROTOCI_CN_00038: layout correction of dsp importantNotes
+ROTOCI_CN_00039: jira handling extended from "BTS[A-Z]*-[0-9]*" to "^[A-Z]*-[0-9]* "
+
+ROTOCI_0.022:
+ROTOCI_NF_00009: identification of 'BRANCHES' more selective and handling of customize branches
+ROTOCI_NF_00014: copy job completed
+ROTOCI_NF_00015: function create_ptsw_flite_vcf added
+ROTOCI_CN_00033: hostid for ccs-db changed
+ROTOCI_CN_00034: pit handling improved
+ROTOCI_CN_00035: some changes in version_control.xml and ptsw_urec_version_control.xml
+
+ROTOCI_0.021:
+ROTOCI_CN_00030: some moduls addedd to version_control_file 
+ROTOCI_CN_00031: detection of header line in trbl_log_list improved
+ROTOCI_CN_00032: jira handling extended from BTSPS* to BTS* 
+
+ROTOCI_0.020:
+ROTOCI_CN_00029: implementation of switchToNewPrefix 
+ROTOCI_CN_00030: extension of version naming to urec product branch releases
+
+ROTOCI_0.019:
+ROTOCI_CN_00028: set PS_PIT state to pending or released for different branches
+
+ROTOCI_0.018:
+ROTOCI_CN_00024: xml_releasenote_id=19 corrected and implemented for increment ptsw too
+ROTOCI_CN_00025: creation of PIT baseline added
+ROTOCI_CN_00026: check of testing-flag improved
+ROTOCI_CN_00027: map file updated 
+
+ROTOCI_0.017:
+ROTOCI_CN_00021: extension of pit file with BASE release
+ROTOCI_CN_00022: some corrections within ps-rel.zip generation
+ROTOCI_CN_00023: replaced name= by id= in case of NF within wft xml
+
+ROTOCI_0.016:
+ROTOCI_NF_00012: extension to new release naming (wrong ROTOCI_NF_00008)
+ROTOCI_NF_00013: creation and upload of ps-rel.zip (containing all ps_rel, ps_lfs and ps_pns target binaries) to wft
+ROTOCI_CN_00007: improved structure of date in release mail in ps_branch 
+ROTOCI_CN_00017: correction of modules within ptsw_urec_vcf
+ROTOCI_CN_00018: file with pit mail info at /build/home/rotoci
+ROTOCI_CN_00019: adding revision number to BTS_PS_src_baselines.txt
+
+ROTOCI_0.015:
+ROTOCI_NF_00011: extension to new branch naming (wrong ROTOCI_NF_00007)
+ROTOCI_NF_00010: LBT1520-a01 eNB Technical Log Decoder support
+
+ROTOCI_0.014:
+ROTOCI_CN_00014: upgrade to releasenote version 7 for increment of PS_REL
+ROTOCI_CN_00015: extended subpath handling for PIT mail
+ROTOCI_CN_00016: correction of function read_vcf to prevent opening a subshell
+
+ROTOCI_0.013:
+ROTOCI_CN_00012: ptsw_rel::read_vcf: --force added for svn export 
+ROTOCI_CN_00013: extension of version string handling in case of product releases
+
+ROTOCI_0.012:
+ROTOCI_NF_00004: upgrade to releasenote version 7
+ROTOCI_CN_00008: reuse of BUILD in case of linked zip files
+ROTOCI_CN_00009: improving PIT Mail
+ROTOCI_CN_00010: release of CCS in state RELEASED for all branches
+ROTOCI_CN_00011: read command removed in function read_vcf to prevent opening a subshell
+PR 117921ESPE02: TAT6_BL : LBT1370-n docmenting technical log to be updated 
+PR 101365ESPE04: An exception for PS should be added to WBTS_TEST_13896
+
+ROTOCI_0.011:
+ROTOCI_NF_00007: svn:keywords handling within PS_ENV
+ROTOCI_NF_00008: extend ps_branch.sh from released based to date/time based alternatetively
+
+ROTOCI_0.010:
+ROTOCI_NF_00006: ps_env handling with subdirectory structure
+
+ROTOCI_0.009:
+PR 100898ESPE04: uREC: LBT1370-nu required LFS-specific trbl_log_list.csv file is not included in DND1.0_ENB_1208_058_00_trbl_log file
+
+ROTOCI_0.008:
+ROTOCI_NF_00001: MOTOR.sh, a new script for creating a new PS_REL from parts of different PS_REL 
+ROTOCI_NF_00002: update_glob_env.sh, a new script updating GLOBAL_ENV within ECL files.
+ROTOCI_NF_00003: "PS_REL is ready for PIT" Mail
+ROTOCI_CN_00001: switch default of MCUHWAPI release behaviour from TESTING to RELEASED
+ROTOCI_CN_00002: sleep 60 in beginning of tag_ps_rel 
+ROTOCI_CN_00003: version file handling in case of linked CCS.zip
+ROTOCI_CN_00004: remove Platform_version_control_file.xml from PS_REL_2013_... and later releases
+ROTOCI_CN_00005: release of CCS in state TESTING for 2012_02_WCDMA
+ROTOCI_CN_00006: handle WFT-Branch as optional
+

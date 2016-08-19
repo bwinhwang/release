@@ -1,0 +1,66 @@
+#!/bin/bash
+###################################################################################################
+# the PS production environment - please use 'export' to get variables 'global'
+###################################################################################################
+
+export PRODPATH=${WORKAREA}
+
+export BINDIR=${PRODPATH}/bin
+export ETCDIR=${PRODPATH}/etc
+export TMPDIR=${PRODPATH}/tmp
+export RELEASEDIR=${PRODPATH}/release
+export PTSWDIR=${PRODPATH}/ptsw
+export YAFT_ZIP_DIR="/ps/PS_REL_YAFT_ZIPS"
+
+export PARSE_SVNLOG=${BINDIR}/parse_svnlog.pl
+export PREP_XMLNOTE=${BINDIR}/prep_xmlnote.pl
+export SEND_MSG=${BINDIR}/send_message.pl
+export RELEASENOTE_XSL=${ETCDIR}/releasenote.xsl
+export XML_SCHEMA=11
+
+export SHARE=/build/ltesdkroot/Platforms
+export PSSHARE=${SHARE}/PS_REL
+export LFSSHARE=${SHARE}/PS_LFS_REL
+
+export SVN="svn --trust-server-cert --non-interactive" # path will be set with setsee
+export SVNSERVER="https://svne1.access.nsn.com"
+export SVNURL="${SVNSERVER}/isource/svnroot"
+export SVNAUTH="${SVNURL}/test-isource-auth"           # Authentication
+
+export SNVGLOBAL="${SVNURL}/BTS_I_GLOBAL"
+export SVNPSPROD="${SVNURL}/BTS_T_PS_PROD"             # PS Production tools
+export SVNPSREL="${SVNURL}/BTS_D_PS_REL"               # 2008, 2009
+export SVNPSREL10="${SVNURL}/BTS_D_PS_REL_2010"        # CCS, DSPHWAPI, MCUHWAPI, branches, tags, trunk
+export SVNPSREL11="${SVNURL}/BTS_D_PS_REL_2011"        # CCS, DSPHWAPI, MCUHWAPI, branches, tags, trunk
+export SVNPSREL12="${SVNURL}/BTS_D_PS_REL_2012"        # CCS, DSPHWAPI, MCUHWAPI, branches, tags, trunk
+export SVNPSREL13="${SVNURL}/BTS_D_PS_REL_2013"        # CCS, DSPHWAPI, MCUHWAPI, branches, tags, trunk
+
+export SVNPTSW12="${SVNURL}/BTS_D_PTSW_2012"           # Production/Testing for Factory
+export SVNPTSW13="${SVNURL}/BTS_D_PTSW_2013"           # Production/Testing for Factory
+
+export SVNPS="${SVNURL}/BTS_SCM_PS"                    # platform ci2rm, ecl
+export SVNRPECL="${SVNURL}/BTS_SCM_RP_ECL"             # Radio Platform ECL
+export SVNENV="${SVNURL}/BTS_I_PS"                     # CCS_ENV, DSPHWAPI_ENV, MCUHWAPI_ENV, Definition , Message
+
+export SVNCCS="${SVNURL}/BTS_SC_CCS"
+export SVNMCU="${SVNURL}/BTS_SC_MCUHWAPI"
+export SVNDSP="${SVNURL}/BTS_SC_DSPHWAPI"
+
+export SVNDLFS="${SVNURL}/BTS_D_SC_LFS"                # Delivery Repositories  
+export SVNDPNS="${SVNURL}/PNS_D_SC_LFS"
+
+export WFT_API=https://wft.inside.nsn.com/ext/api
+export WFT_CHECK=https://wft.inside.nsn.com/ext/load/salamobrabratohne
+export WFT_XML=https://wft.inside.nsn.com/ext/xml
+export WFT_SHOW=https://wft.inside.nsn.com/builds/show
+export WFT_PORT=https://wft.inside.nsn.com:8091
+export WFT_KEY=ukSV3tdA3B7yqcSHUr1lSuh91ozILrqZM5lUOvUk
+
+#export SVNTEST="${SVNURL}/BTS_T_PS_TEST"               # only for testing !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+export IGNORED_BRANCHES="trunk|obsolete|customize"
+
+###################################################################################################
+# eof 
+###################################################################################################
+
