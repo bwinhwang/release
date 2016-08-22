@@ -83,8 +83,11 @@ function findPsRelRepo_OLD ()
 {
    local PSRELRELEASE=${1}
    log "PSRELRELEASE: ${PSRELRELEASE}"
-   [[ "${PSRELRELEASE}" =~ "PS_REL_20[0-9A-Z][0-9]_" ]] || fatal "PSRELELEASE malformed"
-   [[ "${PSRELRELEASE}" =~ "PS_REL_20[0-9][0-9]_[0-9]{2}_[0-9]{3}(-[0-9])?$" ]] ||  [[ "${PSRELRELEASE}" =~ "PS_REL_20[0-9A-Z][0-9]_[0-9]{2}_[0-9]{2}(-[0-9]{1,2})?$" ]] || fatal "version string malformed"
+   local REG0="PS_REL_20[0-9A-Z][0-9]_"
+   [[ "${PSRELRELEASE}" =~ $REG0 ]] || fatal "PSRELELEASE malformed"
+   local REG1="PS_REL_20[0-9][0-9]_[0-9]{2}_[0-9]{3}(-[0-9])?$"
+   local REG2="PS_REL_20[0-9A-Z][0-9]_[0-9]{2}_[0-9]{2}(-[0-9]{1,2})?$"
+   [[ "${PSRELRELEASE}" =~ $REG1 ]] ||  [[ "${PSRELRELEASE}" =~ $REG2 ]] || fatal "version string malformed"
 
    local NUM=`echo "${PSRELRELEASE}" | sed "s/.*PS_REL_20[0-9A-Z]\([0-9]\)_.*/201\1/"`
    PSRELREPO="${SVNURL}/BTS_D_PS_REL_${NUM}"
@@ -96,7 +99,9 @@ function findPsRelRepo ()
 {
    local PSREL=${1}
    log "PS_RELEASE: ${PSREL}"
-   [[ "${PSREL}" =~ "PS_REL_20[0-9]{2}_[0-9]{2}_[0-9]{3}(-[0-9])?$" ]] || [[ "${PSREL}" =~ "PS_REL_20[0-9A-Z]{2}_[0-9]{2}_[0-9]{2}(-[0-9]{1,2})?$" ]] || fatal "PS_RELEASE malformed"
+   local REG0="PS_REL_20[0-9]{2}_[0-9]{2}_[0-9]{3}(-[0-9])?$"
+   local REG1="PS_REL_20[0-9A-Z]{2}_[0-9]{2}_[0-9]{2}(-[0-9]{1,2})?$"
+   [[ "${PSREL}" =~ $REG0 ]] || [[ "${PSREL}" =~ $REG1 ]] || fatal "PS_RELEASE malformed"
 
    local NUM=`echo "${PSREL}" | sed "s/.*PS_REL_20[0-9A-Z]\([0-9]\)_.*/201\1/"`
    PSRELREPO="${SVNURL}/BTS_D_PS_REL_${NUM}"
@@ -113,7 +118,8 @@ function findPtswRepo ()
 {
    local PTSWRELEASE=${1}
    log "PTSWRELEASE: ${PTSWRELEASE}"
-   [[ "${PTSWRELEASE}" =~ "PTSW_.*_20[0-9][0-9]_" ]] || fatal "PTSWRELEASE malformed" 
+   local REG0="PTSW_.*_20[0-9][0-9]_"
+   [[ "${PTSWRELEASE}" =~ $REG0 ]] || fatal "PTSWRELEASE malformed" 
    local NUM=`echo "${PTSWRELEASE}" | sed "s/.*PTSW_.*\(20[0-9][0-9]\)_.*/\1/"`
    PTSWREPO="${SVNURL}/BTS_D_PTSW_${NUM}"
    log "PTSWREPO: ${PTSWREPO}"
@@ -125,7 +131,8 @@ function findLfsRelRepo ()
    local LFSRELEASE=${1}
    local FILE=${RELEASEDIR}/${RELEASE}/lfsrepo.txt
    log "LFSRELEASE: ${LFSRELEASE}"
-   [[ "${LFSRELEASE}" =~ "PS_LFS_REL_" ]] || fatal "LFS RELEASE malformed"
+   local REG0="PS_LFS_REL_"
+   [[ "${LFSRELEASE}" =~ $REG0 ]] || fatal "LFS RELEASE malformed"
    LFSRELREPO=$(echo ${LFSRELEASE} | sed -r -e 's/^.*PS_LFS_REL_([^_]+)_([^_]+)_.*$/BTS_D_SC_LFS_\1_\2/')
    log "${SVN} ls ${LFSSERVER}/${LFSRELREPO}/tags"
    ${SVN} ls ${SVNURL}/${LFSRELREPO}/tags > ${FILE} || fatal "${SVNURL}/${LFSRELREPO}/tags not accessible"
@@ -203,20 +210,27 @@ function incBuildVersion ()
    log "OLDVERSION: ${VERSION}"
    local BL=
    local NUM=
-   [[ "${VERSION}" =~ "_BL$" ]] && BL="_BL" && VERSION=`echo ${VERSION} | sed 's/_BL//'`
+   local REG0="_BL$"
+   [[ "${VERSION}" =~ $REG0 ]] && BL="_BL" && VERSION=`echo ${VERSION} | sed 's/_BL//'`
    if [[ "${NEWNAMESCHEMA}" ]] ; then
-      [[ "${VERSION}" =~ ".*[_]999$" ]] && fatal "version string overflow"
-      [[ "${VERSION}" =~ ".*[-]9$" ]] && fatal "version string overflow"
+      local REG1=".*[_]999$"
+	  local REG2=".*[-]9$"
+      [[ "${VERSION}" =~ $REG1 ]] && fatal "version string overflow"
+      [[ "${VERSION}" =~ $REG2 ]] && fatal "version string overflow"
    else
-      [[ "${VERSION}" =~ ".*[-_]99$" ]] && fatal "version string overflow"
+      local REG3=".*[-_]99$"
+      [[ "${VERSION}" =~ $REG3 ]] && fatal "version string overflow"
    fi
-   if [[ "${NEWNAMESCHEMA}" && "${VERSION}" =~ ".*[-_][0-9]{3}$" ]]; then
+   local REG4=".*[-_][0-9]{3}$"
+   local REG5=".*[-_][0-9]{2}$"
+   local REG6=".*[-_][0-9]$"
+   if [[ "${NEWNAMESCHEMA}" && "${VERSION}" =~ $REG4 ]]; then
       NUM=`echo "${VERSION}" | awk -F "" '{printf ("%03d", ($(NF-2)$(NF-1)$NF)+1)}'`
       VERSION=`echo ${VERSION} | sed 's/[0-9][0-9][0-9]$//'`
-   elif [[ "${VERSION}" =~ ".*[-_][0-9]{2}$" ]]; then
+   elif [[ "${VERSION}" =~ $REG5 ]]; then
       NUM=`echo "${VERSION}" | awk -F "" '{printf ("%02d", ($(NF-1)$NF)+1)}'`
       VERSION=`echo ${VERSION} | sed 's/[0-9][0-9]$//'`
-   elif [[ "${VERSION}" =~ ".*[-_][0-9]$" ]]; then
+   elif [[ "${VERSION}" =~ $REG6 ]]; then
       NUM=`echo "${VERSION}" | awk -F "" '{printf ("%01d", ($NF)+1)}'`
       VERSION=`echo ${VERSION} | sed 's/[0-9]$//'`
    else
@@ -233,12 +247,16 @@ function addPatchNumber()
    local SUFFIX=
    local BL=
    log "VERSION: ${VERSION}"
-   [[ "${VERSION}" =~ "^.*[-_][0-9]{1,3}(_BL)?$" ]] || fatal "version string malformed"
-   [[ "${VERSION}" =~ "^.*_BL$" ]] && BL="_BL" && VERSION=`echo ${VERSION} | sed 's/_BL$//'`
+   local REG0="^.*[-_][0-9]{1,3}(_BL)?$"
+   local REG1="^.*_BL$"
+   [[ "${VERSION}" =~ $REG0 ]] || fatal "version string malformed"
+   [[ "${VERSION}" =~ $REG1 ]] && BL="_BL" && VERSION=`echo ${VERSION} | sed 's/_BL$//'`
+   local REG2="^.*-[0-9]$"
+   local REG3="^.*-[0-9]{2}$"
    if [[ "${NEWNAMESCHEMA}" ]] ; then
-      [[ "${VERSION}" =~ "^.*-[0-9]$" ]] || SUFFIX="-1"
+      [[ "${VERSION}" =~ $REG2 ]] || SUFFIX="-1"
    else
-      [[ "${VERSION}" =~ "^.*-[0-9]{2}$" ]] || SUFFIX="-01"
+      [[ "${VERSION}" =~ $REG3 ]] || SUFFIX="-01"
    fi
    PATCHVERSION="${VERSION}${SUFFIX}${BL}"
    log "PATCHVERSION: ${PATCHVERSION}"
@@ -251,7 +269,8 @@ function delPatchNumber()
    local BL=
    log "VERSION: ${VERSION}"
    DELVERSION=${VERSION}
-   [[ "${VERSION}" =~ "^.*_BL$" ]] && BL="_BL" && VERSION=`echo ${VERSION} | sed 's/_BL$//'`
+   local REG0="^.*_BL$"
+   [[ "${VERSION}" =~ $REG0 ]] && BL="_BL" && VERSION=`echo ${VERSION} | sed 's/_BL$//'`
    VERSION=`echo ${VERSION} | sed 's/-..\?$//'`
    DELVERSION="${VERSION}${BL}"
    log "DELVERSION: ${DELVERSION}"
@@ -571,19 +590,22 @@ function prepare_start()
    [ -d ${RELEASEDIR}/${RELEASE} ] || mkdir ${RELEASEDIR}/${RELEASE}
    cp ${ETCDIR}/map ${RELEASEDIR}/${RELEASE}
 
-   if [[ "${RELEASE}" =~ "-[0-9]{1,2}$" ]] ; then
+   local REG0="-[0-9]{1,2}$"
+   if [[ "${RELEASE}" =~ $REG0 ]] ; then
       PATCH=true
    else
       PATCH=
    fi
 
-   if [[ "${RELEASE}" =~ "PS_REL_[0-9]{4}_[0-9]{2}_[0-9]{3}" ]] ; then
+   local REG1="PS_REL_[0-9]{4}_[0-9]{2}_[0-9]{3}"
+   if [[ "${RELEASE}" =~ $REG1 ]] ; then
       NEWNAMESCHEMA=true
    else
       NEWNAMESCHEMA=
    fi
 
-   if [[ "$CI2RM" =~ "CI2RM_FastTrack" ]]; then
+   local REG2="CI2RM_FastTrack"
+   if [[ "$CI2RM" =~ $REG2 ]]; then
       FAST=fast_track
    else
       FAST=no_fast_track
