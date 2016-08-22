@@ -1,10 +1,10 @@
 #!/bin/bash
 
 unset http_proxy ALL_PROXY ftp_proxy
-declare -r USER='admin'
-declare -r PASS='123456789'
-declare -r URL='http://ullink22.emea.nsn-net.net:1080'
-declare -r JOBS_DIR='/var/fpwork/jenkins/jobs'
+declare -r USER='ca_hzpsscm'
+declare -r PASS='hello121'
+declare -r  URL='https://hzlinv15.china.nsn-net.net:8080'
+eval JOBS_DIR='${JENKINS_HOME}/jobs'
 declare -r ALL_JOBS="TEMPLATE-6-PS_REL TEMPLATE-5-PS_DSP TEMPLATE-4-PS_MCU TEMPLATE-3-PS_CCS TEMPLATE-2-PS_ENV TEMPLATE-1-PS_LFS TEMPLATE-0-PS-CI-RM"
 declare -r ALL_PROMOTIONS="0-Selected_for_release 1-PS_LFS 2-PS_ENV 3-PS_CCS 4-PS_MCU 5-PS_DSP 6-PS_REL"
 declare -r TMPFILE="./tmp.xml"
@@ -86,8 +86,8 @@ function create_jobs () {
       ${SVN} ls ${SVNPS}/CI2RM/customize/${BRANCH} 1>/dev/null 2>/dev/null &&
          sed -i "/\<remote\>/s/${BRANCH}/customize\/${BRANCH}/" ${TMPFILE}
 
-      debug "wget --auth-no-challenge --no-proxy -v --user=$USER --password=PASS "${URL}/createItem?name=${NEW_JOB}" --post-file=${TMPFILE} --header='Content-type: application/xml;charset=ISO-8859-1'"
-      wget --auth-no-challenge --no-proxy -v --user=$USER --password=${PASS} "${URL}/createItem?name=${NEW_JOB}" --post-file=${TMPFILE} --header='Content-type: application/xml;charset=ISO-8859-1'
+      debug "wget --auth-no-challenge --no-proxy --no-check-certificate -v --user=$USER --password=PASS "${URL}/createItem?name=${NEW_JOB}" --post-file=${TMPFILE} --header='Content-type: application/xml;charset=ISO-8859-1'"
+      wget --auth-no-challenge --no-proxy --no-check-certificate -v --user=$USER --password=${PASS} "${URL}/createItem?name=${NEW_JOB}" --post-file=${TMPFILE} --header='Content-type: application/xml;charset=ISO-8859-1'
       [ "$?" != "0" ] && fatal "wget createItem ${NEW_JOB} failed"
    done
    rm ${TMPFILE}
@@ -131,8 +131,8 @@ function update_job () {
    else
       fatal "job configuration is missing! (maybe job creation failed)"
    fi
-   debug "wget --header='Content-type: application/xml; charset=ISO-8859-1' --auth-no-challenge --no-proxy -v --user=${USER} --password=PASS ${JOB} --post-file=${XML}"
-   wget --header='Content-type: application/xml; charset=ISO-8859-1' --auth-no-challenge --no-proxy -v --user=${USER} --password=${PASS} ${JOB} --post-file=${XML}
+   debug "wget --header='Content-type: application/xml; charset=ISO-8859-1' --auth-no-challenge --no-check-certificate --no-proxy -v --user=${USER} --password=PASS ${JOB} --post-file=${XML}"
+   wget --header='Content-type: application/xml; charset=ISO-8859-1' --auth-no-challenge --no-check-certificate --no-proxy -v --user=${USER} --password=${PASS} ${JOB} --post-file=${XML}
    [ "$?" != "0" ] && fatal "wget update ${JOB} failed"
 }
 
