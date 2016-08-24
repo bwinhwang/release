@@ -153,29 +153,29 @@ function co_env ()
 
    local ECL_ENV_REVISION=`echo -e ${ECL_PS_ENV} | sed "s/.*@//"`
    local ECL_ENV_BASE=`echo -e ${ECL_PS_ENV} | sed "s/@.*//"`
-   ${SVN} export --force --ignore-keywords ${SVNSERVER}${ECL_ENV_BASE}/I_Interface/Platform_Env@${ECL_ENV_REVISION} ${RELEASEDIR}/${RELEASE}/interfaces ||
+   ${SVN} export --force  ${SVNSERVER}${ECL_ENV_BASE}/I_Interface/Platform_Env@${ECL_ENV_REVISION} ${RELEASEDIR}/${RELEASE}/interfaces ||
      fatal "svn export ${SVNSERVER}${ECL_ENV_BASE}/I_Interface/Platform_Env@${ECL_ENV_REVISION} failed"
 
    local ECL_CCS_REVISION=`echo -e ${ECL_CCS} | sed "s/.*@//"`
    local ECL_CCS_BASE=`echo -e ${ECL_CCS} | sed "s/@.*//"`
-   ${SVN} export --force --ignore-keywords ${SVNSERVER}${ECL_CCS_BASE}/I_Interface/Platform_Env@${ECL_CCS_REVISION} ${RELEASEDIR}/${RELEASE}/interfaces || 
+   ${SVN} export --force  ${SVNSERVER}${ECL_CCS_BASE}/I_Interface/Platform_Env@${ECL_CCS_REVISION} ${RELEASEDIR}/${RELEASE}/interfaces || 
      fatal "svn export ${SVNSERVER}${ECL_CCS_BASE}/I_Interface/Platform_Env@${ECL_CCS_REVISION} failed"
 
    local ECL_MCUHWAPI_REVISION=`echo -e ${ECL_MCUHWAPI} | sed "s/.*@//"`
    local ECL_MCUHWAPI_BASE=`echo -e ${ECL_MCUHWAPI} | sed "s/@.*//"`
-   ${SVN} export --force --ignore-keywords ${SVNSERVER}${ECL_MCUHWAPI_BASE}/I_Interface/Platform_Env@${ECL_MCUHWAPI_REVISION} ${RELEASEDIR}/${RELEASE}/interfaces || 
+   ${SVN} export --force  ${SVNSERVER}${ECL_MCUHWAPI_BASE}/I_Interface/Platform_Env@${ECL_MCUHWAPI_REVISION} ${RELEASEDIR}/${RELEASE}/interfaces || 
      fatal "svn export ${SVNSERVER}${ECL_MCUHWAPI_BASE}/I_Interface/Platform_Env@${ECL_MCUHWAPI_REVISION} failed"
 
    local ECL_DSPHWAPI_REVISION=`echo -e ${ECL_DSPHWAPI} | sed "s/.*@//"`
    local ECL_DSPHWAPI_BASE=`echo -e ${ECL_DSPHWAPI} | sed "s/@.*//"`
-   ${SVN} export --force --ignore-keywords ${SVNSERVER}${ECL_DSPHWAPI_BASE}/I_Interface/Platform_Env@${ECL_DSPHWAPI_REVISION} ${RELEASEDIR}/${RELEASE}/interfaces || 
+   ${SVN} export --force  ${SVNSERVER}${ECL_DSPHWAPI_BASE}/I_Interface/Platform_Env@${ECL_DSPHWAPI_REVISION} ${RELEASEDIR}/${RELEASE}/interfaces || 
      fatal "svn export ${SVNSERVER}${ECL_DSPHWAPI_BASE}/I_Interface/Platform_Env@${ECL_DSPHWAPI_REVISION} failed"
 
    for i in `find ${RELEASEDIR}/${RELEASE}/interfaces -type f | grep -v "\.svn"` ; do
       dos2unix ${i}
    done
 
-   ${SVN} export --force --ignore-keywords ${SVNSERVER}${PS_ENV_BRANCH}/I_Interface/Platform_Env ${RELEASEDIR}/${RELEASE}/export_env ||
+   ${SVN} export --force  ${SVNSERVER}${PS_ENV_BRANCH}/I_Interface/Platform_Env ${RELEASEDIR}/${RELEASE}/export_env ||
      fatal "svn export ${SVNSERVER}${PS_ENV_BRANCH}/I_Interface/Platform_Env failed"
 
    for i in `find ${RELEASEDIR}/${RELEASE}/export_env -type f | grep -v "\.svn"` ; do
