@@ -159,46 +159,6 @@ function branch_mcu_sw ()
    log "DONE"
 }
 
-function create_externals_mcu_sw ()
-{
-   log "STARTED"
-   echo FCT_PTR=${FCT_PTR} > ${FCT_PTR_FILE}
-   local SRC=${SVNSERVER}${PS_MCU_BRANCH}
-   if [[ "`${SVN} pg svn:externals ${SRC} | wc -l`" != "0" ]]; then
-      # only for old branches with externals
-      local FILE=${RELEASEDIR}/${RELEASE}/mcu_sw_externals.txt
-      local DST=${RELEASEDIR}/${RELEASE}/branch_mcu
-      local REPO=`echo -e "${RELEASEPSRELREPO}" | sed "s|https://svne1.access.nsn.com||"`
-   
-      echo "/isource/svnroot/BTS_T_PS_TOOLS/StripWatcher/tags/0.6 PS_Tools/StripWatcher" > ${FILE}
-      echo "" >> ${FILE}
-      echo "/isource/svnroot/BTS_T_PS_SWBUILD/tags/${ECL_SWBUILD}/SwBuild/common SwBuild/common" >> ${FILE}
-      echo "/isource/svnroot/BTS_T_PS_SWBUILD/tags/${ECL_SWBUILD}/SwBuild/Definitions SwBuild/Definitions" >> ${FILE}
-      echo "/isource/svnroot/BTS_T_PS_SWBUILD/tags/${ECL_SWBUILD}/SwBuild/doc SwBuild/doc" >> ${FILE}
-      echo "/isource/svnroot/BTS_T_PS_SWBUILD/tags/${ECL_SWBUILD}/SwBuild/user SwBuild/user" >> ${FILE}
-      echo "/isource/svnroot/BTS_E_OSE461/tags/${ECL_OSE_461}/OSE/OSE4.6.1 OSE/OSE4.6.1" >> ${FILE}
-      echo "/isource/svnroot/BTS_E_OSE53/tags/${ECL_OSE_53}/E_External/OSE/OSE5.3 OSE/OSE5.3" >> ${FILE}
-      echo "" >> ${FILE}
-      echo "/isource/svnroot/BTS_I_GLOBAL/tags/${ECL_GLOBAL_ENV}/I_Interface/Global_Env I_Interface/Global_Env" >> ${FILE}
-      echo "/isource/svnroot/BTS_I_PS/${NEW_BRANCH_PS_ENV}/tags/${NEW_PS_ENV}/I_Interface/Platform_Env/Messages I_Interface/Platform_Env/Messages" >> ${FILE}
-      echo "/isource/svnroot/BTS_I_PS/${NEW_BRANCH_PS_ENV}/tags/${NEW_PS_ENV}/I_Interface/Platform_Env/Definitions I_Interface/Platform_Env/Definitions" >> ${FILE}
-      echo "/isource/svnroot/BTS_I_PS/${NEW_BRANCH_PS_ENV}/tags/${NEW_PS_ENV}/I_Interface/Platform_Env/CCS_ENV I_Interface/Platform_Env/CCS_ENV" >> ${FILE}
-      echo "/isource/svnroot/BTS_I_PS/${NEW_BRANCH_PS_ENV}/tags/${NEW_PS_ENV}/I_Interface/Platform_Env/DSPHWAPI_ENV I_Interface/Platform_Env/DSPHWAPI_ENV" >> ${FILE}
-      echo "" >> ${FILE}
-      echo "/isource/svnroot/BTS_SC_CCS/${NEW_BRANCH_PS_CCS_SW}/tags/${NEW_PS_CCS_SW}/CCS_COTS CCS_COTS" >> ${FILE}
-      echo "/isource/svnroot/BTS_SC_CCS/${NEW_BRANCH_PS_CCS_SW}/tags/${NEW_PS_CCS_SW}/CCS_Daemon CCS_Daemon" >> ${FILE}
-      echo "/isource/svnroot/BTS_SC_CCS/${NEW_BRANCH_PS_CCS_SW}/tags/${NEW_PS_CCS_SW}/CCS_Services CCS_Services" >> ${FILE}
-      echo "/isource/svnroot/BTS_SC_CCS/${NEW_BRANCH_PS_CCS_SW}/tags/${NEW_PS_CCS_SW}/CCS_TestCases CCS_TestCases" >> ${FILE}
-      echo "/isource/svnroot/BTS_SC_CCS/${NEW_BRANCH_PS_CCS_SW}/tags/${NEW_PS_CCS_SW}/CCS_Utils CCS_Utils" >> ${FILE}
-      echo "${REPO}/CCS/tags/${NEW_PS_CCS_BUILD}/C_Platform/CCS C_Platform/CCS" >> ${FILE}
-   
-      ${SVN} co --non-recursive ${SRC} ${DST}
-      ${SVN} propset svn:externals ${DST} -F ${FILE} || fatal "set properties 'svn:externals' failed for ${DST}"
-      ${SVN} ci -m "${ROTOCI_VERSION}" ${DST} || fatal "svn ci failed"
-   fi
-   log "DONE"
-}
-
 function define_mcu_sw ()
 {
    log "STARTED"

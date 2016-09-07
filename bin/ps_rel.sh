@@ -41,12 +41,6 @@ function get_versions ()
    log "DONE"
 }
 
-# defines mode of VCF creation
-function get_vcf_mode () {
-   VCF_MODE="OLD"
-   local NUM=`echo "${RELEASE}" | sed "s/.*PS_REL_\(20[0-9][0-9]\)_\([0-9][0-9]\)_.*/\1\2/"`
-   [[ "${NUM}" -ge "201507" ]] && VCF_MODE="NEW"
-}
 
 # calculate 8 digit version number for CCS and MCU version files (from unix time)
 function calc_ver_num ()
@@ -225,177 +219,6 @@ function create_trbl_log_list()
    log "DONE"
 }
 
-function create_vcf_old()
-{
-   log "STARTED"
-   echo FCT_PTR=${FCT_PTR} > ${FCT_PTR_FILE}
-   if [[ "${RELEASE}" =~ "_20M2_" ]]; then
-      get_versions
-      local FNAME=Platform_version_control_file.xml
-      local FILE=${RELEASEDIR}/${RELEASE}/${FNAME}
-      local PS_REL_DST="${RELEASEPSRELREPO}/branches/${RELEASE}"
-
-      echo -e "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" > ${FILE}
-      echo -e "<versionControllFile>" >> ${FILE}
-
-      local SOURCE="C_Platform/MCUHWAPI/Exe/LINUX_EP8548E/FCM/HWAPI.txz"
-      ${SVN} ls ${RELEASEPSRELREPO}/MCUHWAPI/tags/${NEW_PS_MCU_BUILD}/${SOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "apps" "${MCU_VERSION}" "FCMD"
-      SOURCE="C_Platform/MCUHWAPI/Exe/LINUX_EP8548E/FSP/HWAPI.txz"
-      ${SVN} ls ${RELEASEPSRELREPO}/MCUHWAPI/tags/${NEW_PS_MCU_BUILD}/${SOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "apps" "${MCU_VERSION}" "FSPC"
-      SOURCE="C_Platform/MCUHWAPI/Exe/LINUX_OCTEON2/FCT/hwr.tgz"
-      ${SVN} ls ${RELEASEPSRELREPO}/MCUHWAPI/tags/${NEW_PS_MCU_BUILD}/${SOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "apps/fct" "${MCU_VERSION}" "FCT"
-      SOURCE="C_Platform/MCUHWAPI/Exe/LINUX_OCTEON2/FSP/hwr.tgz"
-      ${SVN} ls ${RELEASEPSRELREPO}/MCUHWAPI/tags/${NEW_PS_MCU_BUILD}/${SOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "apps/fsp" "${MCU_VERSION}" "FSP"
-      SOURCE="C_Platform/CCS/Tar/LINUX_EP8548E/CCS.txz"
-      ${SVN} ls ${RELEASEPSRELREPO}/CCS/tags/${NEW_PS_CCS_BUILD}/${SOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "addons" "${CCS_VERSION}" "FCMD" "FSPC"
-      SOURCE="C_Platform/CCS/Tar/LINUX_OCTEON2/CCS.tgz"
-      ${SVN} ls ${RELEASEPSRELREPO}/CCS/tags/${NEW_PS_CCS_BUILD}/${SOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "apps" "${CCS_VERSION}" "FCT" "FSP"
-
-      echo -e "</versionControllFile>" >> ${FILE}
-
-      ${TEST} ${SVN} import ${FILE} ${PS_REL_DST}/C_Platform/${FNAME} -m "${ROTOCI_VERSION}" || fatal "import ${FILE} to ${PS_REL_DST}/C_Platform/${FNAME} failed"
-   fi
-   log "DONE"
-}
-
-function create_vcf()
-{
-   log "STARTED"
-   echo FCT_PTR=${FCT_PTR} > ${FCT_PTR_FILE}
-
-   get_vcf_mode ${RELEASE}
-   log "VCF_MODE=${VCF_MODE}"
-   [ "${VCF_MODE}" = "NEW" ] && log "SKIPPED" && return
-
-   get_versions
-   local FNAME=version_control.xml
-   local FILE=${RELEASEDIR}/${RELEASE}/${FNAME}
-   local PS_REL_DST="${RELEASEPSRELREPO}/branches/${RELEASE}"
-
-   echo -e "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" > ${FILE}
-   echo -e "<versionControllFile>" >> ${FILE}
-
-   local SOURCE="MCUHWAPI/Exe/LINUX_EP8548E/FCM/HWAPI.txz"
-   ${SVN} ls ${RELEASEPSRELREPO}/MCUHWAPI/tags/${NEW_PS_MCU_BUILD}/C_Platform/${SOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "apps" "${MCU_VERSION}" "FCMD"
-   SOURCE="MCUHWAPI/Exe/LINUX_EP8548E/FSP/HWAPI.txz"
-   ${SVN} ls ${RELEASEPSRELREPO}/MCUHWAPI/tags/${NEW_PS_MCU_BUILD}/C_Platform/${SOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "apps" "${MCU_VERSION}" "FSPC"
-   SOURCE="MCUHWAPI/Exe/LINUX_OCTEON2/FCT/hwr.tgz"
-   ${SVN} ls ${RELEASEPSRELREPO}/MCUHWAPI/tags/${NEW_PS_MCU_BUILD}/C_Platform/${SOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "apps/fct" "${MCU_VERSION}" "FCT" "FCTE"
-   SOURCE="MCUHWAPI/Exe/LINUX_OCTEON2/FCT/hwr.tgz"
-   ${SVN} ls ${RELEASEPSRELREPO}/MCUHWAPI/tags/${NEW_PS_MCU_BUILD}/C_Platform/${SOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "apps" "${MCU_VERSION}" "SCR"
-   SOURCE="MCUHWAPI/Exe/LINUX_OCTEON2/FSP/hwr.tgz"
-   ${SVN} ls ${RELEASEPSRELREPO}/MCUHWAPI/tags/${NEW_PS_MCU_BUILD}/C_Platform/${SOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "apps/fsp" "${MCU_VERSION}" "FSP"
-   SOURCE="CCS/Tar/LINUX_EP8548E/CCS.txz"
-   ${SVN} ls ${RELEASEPSRELREPO}/CCS/tags/${NEW_PS_CCS_BUILD}/C_Platform/${SOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "addons" "${CCS_VERSION}" "FCMD" "FSPC"
-   SOURCE="CCS/Tar/LINUX_OCTEON2/CCS.tgz"
-   ${SVN} ls ${RELEASEPSRELREPO}/CCS/tags/${NEW_PS_CCS_BUILD}/C_Platform/${SOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "apps" "${CCS_VERSION}" "FCT" "FSP" "SCR"
-   ${SVN} ls ${RELEASEPSRELREPO}/CCS/tags/${NEW_PS_CCS_BUILD}/C_Platform/${SOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "apps/fct" "${CCS_VERSION}" "FCTE"
-
-   SOURCE=DSPHWAPI/Bin/Nyquist/Lte/`${SVN} ls ${RELEASEPSRELREPO}/DSPHWAPI/tags/${NEW_PS_DSP_BUILD}/C_Platform/DSPHWAPI/Bin/Nyquist/Lte | grep FSP[D-Z]-DSP-RT`
-   ${SVN} ls ${RELEASEPSRELREPO}/DSPHWAPI/tags/${NEW_PS_DSP_BUILD}/C_Platform/${SOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "" "" "FSPN" "FSP"
-   SOURCE=DSPHWAPI/Bin/Nyquist/`${SVN} ls ${RELEASEPSRELREPO}/DSPHWAPI/tags/${NEW_PS_DSP_BUILD}/C_Platform/DSPHWAPI/Bin/Nyquist | grep FSP[D-Z]-DSP-BW`
-   ${SVN} ls ${RELEASEPSRELREPO}/DSPHWAPI/tags/${NEW_PS_DSP_BUILD}/C_Platform/${SOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "" "" "FSPN" "FSP"
-   SOURCE="MCUHWAPI/Exe/LINUX_OCTEON2/FCT/hwmt.tgz"
-   ${SVN} ls ${RELEASEPSRELREPO}/MCUHWAPI/tags/${NEW_PS_MCU_BUILD}/C_Platform/${SOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "apps/fct" "${MCU_VERSION}" "FCTE" "FCT"
-   SOURCE="MCUHWAPI/Exe/LINUX_OCTEON2/FSP/hwmt.tgz"
-   ${SVN} ls ${RELEASEPSRELREPO}/MCUHWAPI/tags/${NEW_PS_MCU_BUILD}/C_Platform/${SOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "apps/fsp" "${MCU_VERSION}" "FSPN"
-   SOURCE="MCUHWAPI/Exe/LINUX_OCTEON2/FSP/hwfw.tgz"
-   ${SVN} ls ${RELEASEPSRELREPO}/MCUHWAPI/tags/${NEW_PS_MCU_BUILD}/C_Platform/${SOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "apps/fsp" "${MCU_VERSION}" "FSPN"
-   SOURCE="MCUHWAPI/Exe/LINUX_KEPLER2/KEPLER2/hwr.tgz"
-   ${SVN} ls ${RELEASEPSRELREPO}/MCUHWAPI/tags/${NEW_PS_MCU_BUILD}/C_Platform/${SOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "apps" "${MCU_VERSION}" "FZM"
-   SOURCE="CCS/Tar/LINUX_KEPLER2/CCS.tgz"
-   ${SVN} ls ${RELEASEPSRELREPO}/CCS/tags/${NEW_PS_CCS_BUILD}/C_Platform/${SOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "apps" "${CCS_VERSION}" "FZM"
-   
-   echo -e "</versionControllFile>" >> ${FILE}
-
-   ${TEST} ${SVN} import ${FILE} ${PS_REL_DST}/C_Platform/${FNAME} -m "${ROTOCI_VERSION}" || fatal "import ${FILE} to ${PS_REL_DST}/C_Platform/${FNAME} failed"
-   log "DONE"
-}
-
-function create_vcf_new()
-{
-   log "STARTED"
-   echo FCT_PTR=${FCT_PTR} > ${FCT_PTR_FILE}
-
-   get_vcf_mode ${RELEASE}
-   log "VCF_MODE=${VCF_MODE}"
-   [ "${VCF_MODE}" = "NEW" ] && log "SKIPPED" && return
-
-   get_versions
-   local FNAME=version_control.xml
-   local FILE=${RELEASEDIR}/${RELEASE}/${FNAME}
-   local PS_REL_DST="${RELEASEPSRELREPO}/branches/${RELEASE}"
-
-   echo -e "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" > ${FILE}
-   echo -e "<versionControllFile>" >> ${FILE}
-
-   local ORIGSOURCE="MCUHWAPI/Exe/LINUX_EP8548E/FCM/HWAPI.txz"
-   local SOURCE="../${ORIGSOURCE}"
-   ${SVN} ls ${RELEASEPSRELREPO}/MCUHWAPI/tags/${NEW_PS_MCU_BUILD}/C_Platform/${ORIGSOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "apps" "${MCU_VERSION}" "FCMD"
-   ORIGSOURCE="MCUHWAPI/Exe/LINUX_EP8548E/FSP/HWAPI.txz"
-   SOURCE="../${ORIGSOURCE}"
-   ${SVN} ls ${RELEASEPSRELREPO}/MCUHWAPI/tags/${NEW_PS_MCU_BUILD}/C_Platform/${ORIGSOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "apps" "${MCU_VERSION}" "FSPC"
-   ORIGSOURCE="MCUHWAPI/Exe/LINUX_OCTEON2/FCT/hwr.tgz"
-   SOURCE="../${ORIGSOURCE}"
-   ${SVN} ls ${RELEASEPSRELREPO}/MCUHWAPI/tags/${NEW_PS_MCU_BUILD}/C_Platform/${ORIGSOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "apps/fct" "${MCU_VERSION}" "FCT" "FCTE"
-   ORIGSOURCE="MCUHWAPI/Exe/LINUX_OCTEON2/FCT/hwr.tgz"
-   SOURCE="../${ORIGSOURCE}"
-   ${SVN} ls ${RELEASEPSRELREPO}/MCUHWAPI/tags/${NEW_PS_MCU_BUILD}/C_Platform/${ORIGSOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "apps" "${MCU_VERSION}" "SCR"
-   ORIGSOURCE="MCUHWAPI/Exe/LINUX_OCTEON2/FSP/hwr.tgz"
-   SOURCE="../${ORIGSOURCE}"
-   ${SVN} ls ${RELEASEPSRELREPO}/MCUHWAPI/tags/${NEW_PS_MCU_BUILD}/C_Platform/${ORIGSOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "apps/fsp" "${MCU_VERSION}" "FSP"
-   ORIGSOURCE="CCS/Tar/LINUX_EP8548E/CCS.txz"
-   SOURCE="../${ORIGSOURCE}"
-   ${SVN} ls ${RELEASEPSRELREPO}/CCS/tags/${NEW_PS_CCS_BUILD}/C_Platform/${ORIGSOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "addons" "${CCS_VERSION}" "FCMD" "FSPC"
-   ORIGSOURCE="CCS/Tar/LINUX_OCTEON2/CCS.tgz"
-   SOURCE="../${ORIGSOURCE}"
-   ${SVN} ls ${RELEASEPSRELREPO}/CCS/tags/${NEW_PS_CCS_BUILD}/C_Platform/${ORIGSOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "apps" "${CCS_VERSION}" "FCT" "FSP" "SCR"
-   ${SVN} ls ${RELEASEPSRELREPO}/CCS/tags/${NEW_PS_CCS_BUILD}/C_Platform/${ORIGSOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "apps/fct" "${CCS_VERSION}" "FCTE"
-
-   ORIGSOURCE=DSPHWAPI/Bin/Nyquist/Lte/`${SVN} ls ${RELEASEPSRELREPO}/DSPHWAPI/tags/${NEW_PS_DSP_BUILD}/C_Platform/DSPHWAPI/Bin/Nyquist/Lte | grep FSP[D-Z]-DSP-RT`
-   SOURCE="../${ORIGSOURCE}"
-   ${SVN} ls ${RELEASEPSRELREPO}/DSPHWAPI/tags/${NEW_PS_DSP_BUILD}/C_Platform/${ORIGSOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "" "" "FSPN" "FSP"
-   ORIGSOURCE=DSPHWAPI/Bin/Nyquist/`${SVN} ls ${RELEASEPSRELREPO}/DSPHWAPI/tags/${NEW_PS_DSP_BUILD}/C_Platform/DSPHWAPI/Bin/Nyquist | grep FSP[D-Z]-DSP-BW`
-   SOURCE="../${ORIGSOURCE}"
-   ${SVN} ls ${RELEASEPSRELREPO}/DSPHWAPI/tags/${NEW_PS_DSP_BUILD}/C_Platform/${ORIGSOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "" "" "FSPN" "FSP"
-   ORIGSOURCE="MCUHWAPI/Exe/LINUX_OCTEON2/FCT/hwmt.tgz"
-   SOURCE="../${ORIGSOURCE}"
-   ${SVN} ls ${RELEASEPSRELREPO}/MCUHWAPI/tags/${NEW_PS_MCU_BUILD}/C_Platform/${ORIGSOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "apps/fct" "${MCU_VERSION}" "FCTE" "FCT"
-   ORIGSOURCE="MCUHWAPI/Exe/LINUX_OCTEON2/FSP/hwmt.tgz"
-   SOURCE="../${ORIGSOURCE}"
-   ${SVN} ls ${RELEASEPSRELREPO}/MCUHWAPI/tags/${NEW_PS_MCU_BUILD}/C_Platform/${ORIGSOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "apps/fsp" "${MCU_VERSION}" "FSPN"
-   ORIGSOURCE="MCUHWAPI/Exe/LINUX_OCTEON2/FSP/hwfw.tgz"
-   SOURCE="../${ORIGSOURCE}"
-   ${SVN} ls ${RELEASEPSRELREPO}/MCUHWAPI/tags/${NEW_PS_MCU_BUILD}/C_Platform/${ORIGSOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "apps/fsp" "${MCU_VERSION}" "FSPN"
-   ORIGSOURCE="MCUHWAPI/Exe/LINUX_KEPLER2/KEPLER2/hwr.tgz"
-   SOURCE="../${ORIGSOURCE}"
-   ${SVN} ls ${RELEASEPSRELREPO}/MCUHWAPI/tags/${NEW_PS_MCU_BUILD}/C_Platform/${ORIGSOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "apps" "${MCU_VERSION}" "FZM"
-   ORIGSOURCE="CCS/Tar/LINUX_KEPLER2/CCS.tgz"
-   SOURCE="../${ORIGSOURCE}"
-   ${SVN} ls ${RELEASEPSRELREPO}/CCS/tags/${NEW_PS_CCS_BUILD}/C_Platform/${ORIGSOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "apps" "${CCS_VERSION}" "FZM"
-   ORIGSOURCE="CCS/Tar/LINUX_OCTEON2_LRC/CCS.txz"
-   SOURCE="../${ORIGSOURCE}"
-   ${SVN} ls ${RELEASEPSRELREPO}/CCS/tags/${NEW_PS_CCS_BUILD}/C_Platform/${ORIGSOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "shp-apps" "${CCS_VERSION}" "LCP"
-   ORIGSOURCE="MCUHWAPI/Exe/LINUX_OCTEON2/LCP_SHP/hwr.tgz"
-   SOURCE="../${ORIGSOURCE}"
-   ${SVN} ls ${RELEASEPSRELREPO}/MCUHWAPI/tags/${NEW_PS_MCU_BUILD}/C_Platform/${ORIGSOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "shp-apps" "${CCS_VERSION}" "LCP"
-   ORIGSOURCE="MCUHWAPI/Exe/LINUX_OCTEON2/LCP_SHP/hwmt.tgz"
-   SOURCE="../${ORIGSOURCE}"
-   ${SVN} ls ${RELEASEPSRELREPO}/MCUHWAPI/tags/${NEW_PS_MCU_BUILD}/C_Platform/${ORIGSOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "shp-apps" "${CCS_VERSION}" "LCP"
-   ORIGSOURCE="MCUHWAPI/Exe/LINUX_OCTEON2/LCP_AHP/hwr.tgz"
-   SOURCE="../${ORIGSOURCE}"
-   ${SVN} ls ${RELEASEPSRELREPO}/MCUHWAPI/tags/${NEW_PS_MCU_BUILD}/C_Platform/${ORIGSOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "ahp-apps" "${CCS_VERSION}" "LCP"
-   ORIGSOURCE="MCUHWAPI/Exe/LINUX_OCTEON2/LCP_AHP/hwmt.tgz"
-   SOURCE="../${ORIGSOURCE}"
-   ${SVN} ls ${RELEASEPSRELREPO}/MCUHWAPI/tags/${NEW_PS_MCU_BUILD}/C_Platform/${ORIGSOURCE} 1>/dev/null 2>/dev/null && write_xml_tag "ahp-apps" "${CCS_VERSION}" "LCP"
-   
-   echo -e "</versionControllFile>" >> ${FILE}
-
-   ${TEST} ${SVN} mkdir ${PS_REL_DST}/C_Platform/versions -m "${ROTOCI_VERSION}"
-   ${TEST} ${SVN} import ${FILE} ${PS_REL_DST}/C_Platform/versions/${FNAME} -m "${ROTOCI_VERSION}" || fatal "import ${FILE} to ${PS_REL_DST}/C_Platform/versions/${FNAME} failed"
-   log "DONE"
-}
-
 # refine: syntax check, format
 function refine_xml_file ()
 {
@@ -412,10 +235,6 @@ function create_vcf_combined ()
 {
    log "STARTED"
    echo FCT_PTR=${FCT_PTR} > ${FCT_PTR_FILE}
-
-   get_vcf_mode ${RELEASE}
-   log "VCF_MODE=${VCF_MODE}"
-   [ "${VCF_MODE}" = "OLD" ] && log "SKIPPED" && return
 
    local FNAME=version_control.xml
    local OUTFILE=${RELEASEDIR}/${RELEASE}/${FNAME}

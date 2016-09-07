@@ -38,8 +38,7 @@ function sourceEnv()
 function call_function ()
 {
    case "$1" in
-      branch_dsp_sw )                 branch_dsp_sw;                 FCT_PTR="create_externals_dsp_sw";;
-      create_externals_dsp_sw )       create_externals_dsp_sw;       FCT_PTR="define_dsp_sw";;
+      branch_dsp_sw )                 branch_dsp_sw;                 FCT_PTR="define_dsp_sw";;
       define_dsp_sw )                 define_dsp_sw;                 FCT_PTR="tag_dsp_sw";;
       tag_dsp_sw )                    tag_dsp_sw;                    FCT_PTR="define_dsp_build";;
       define_dsp_build )              define_dsp_build;              FCT_PTR="tag_dsp_build";;

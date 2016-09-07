@@ -40,10 +40,7 @@ function call_function ()
    case "$1" in
       calc_ver_num )                  calc_ver_num;                  FCT_PTR="combine_psrel";;
       combine_psrel )                 combine_psrel;                 FCT_PTR="create_trbl_log_list";;
-      create_trbl_log_list )          create_trbl_log_list;          FCT_PTR="create_vcf_old";;
-      create_vcf_old )                create_vcf_old;                FCT_PTR="create_vcf";;
-      create_vcf )                    create_vcf;                    FCT_PTR="create_vcf_new";;
-      create_vcf_new )                create_vcf_new;                FCT_PTR="create_vcf_combined";;
+      create_trbl_log_list )          create_trbl_log_list;          FCT_PTR="create_vcf_combined";;
       create_vcf_combined )           create_vcf_combined;           FCT_PTR="create_ptsw_fsmr3_vcf";;
       create_ptsw_fsmr3_vcf )         create_ptsw_fsmr3_vcf;         FCT_PTR="create_ptsw_fsmr4_vcf";;
       create_ptsw_fsmr4_vcf )         create_ptsw_fsmr4_vcf;         FCT_PTR="create_ptsw_urec_vcf";;

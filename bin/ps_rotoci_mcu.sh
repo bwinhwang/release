@@ -38,8 +38,7 @@ function sourceEnv()
 function call_function ()
 {
    case "$1" in
-      branch_mcu_sw )                 branch_mcu_sw;                 FCT_PTR="create_externals_mcu_sw";;
-      create_externals_mcu_sw )       create_externals_mcu_sw;       FCT_PTR="define_mcu_sw";;
+      branch_mcu_sw )                 branch_mcu_sw;                 FCT_PTR="define_mcu_sw";;
       define_mcu_sw )                 define_mcu_sw;                 FCT_PTR="tag_mcu_sw";;
       tag_mcu_sw )                    tag_mcu_sw;                    FCT_PTR="define_mcu_build";;
       define_mcu_build )              define_mcu_build;              FCT_PTR="tag_mcu_build";;
