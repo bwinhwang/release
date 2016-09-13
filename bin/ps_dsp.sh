@@ -166,7 +166,7 @@ function create_information_file_dsp_build ()
    log "RELNOTEINFO:${RELNOTEINFO}"
    log "DELIVERY_BASELINE:${DELIVERY_BASELINE}"
    log "SW_BASELINE:${SW_BASELINE}"
-   local VERSIONSTRING=`echo -e "Version string: BTS_SC_DSPHWAPI_${BRANCH}-trunk@"``echo -e ${ECL_DSPHWAPI} | sed "s/.*@//"`
+   local VERSIONSTRING=`echo -e "Version string: BTS_SC_DSPHWAPI_${BRANCH}-trunk@"``echo -e ${ECL_UPHWAPI} | sed "s/.*@//"`
    echo "${VERSIONSTRING}" > ${RELNOTEINFO}
    echo " " >> ${RELNOTEINFO}
    echo "Notes for changes in DSPHWAPI_BUILD regarding Common Tools, Faraday and Nyquist 
@@ -185,9 +185,9 @@ function branch_dsp_sw ()
    log "STARTED"
    echo FCT_PTR=${FCT_PTR} > ${FCT_PTR_FILE}
    ${SVN} ls ${SVNSERVER}${PS_DSP_BRANCH} 1>/dev/null 2>/dev/null && ${TEST} ${SVN} rm -m "${ROTOCI_VERSION}" ${SVNSERVER}${PS_DSP_BRANCH}
-   ${TEST} ${SVN} cp --parents -m "${ROTOCI_VERSION}" ${SVNSERVER}${ECL_DSPHWAPI} ${SVNSERVER}${PS_DSP_BRANCH} ||
-     ${TEST} ${SVN} cp --parents -m "${ROTOCI_VERSION}" ${SVNSERVER}${ECL_DSPHWAPI} ${SVNSERVER}${PS_DSP_BRANCH} ||
-     fatal "svn cp ${SVNSERVER}${ECL_DSPHWAPI} ${SVNSERVER}${PS_DSP_BRANCH} failed"
+   ${TEST} ${SVN} cp --parents -m "${ROTOCI_VERSION}" ${SVNSERVER}${ECL_UPHWAPI} ${SVNSERVER}${PS_DSP_BRANCH} ||
+     ${TEST} ${SVN} cp --parents -m "${ROTOCI_VERSION}" ${SVNSERVER}${ECL_UPHWAPI} ${SVNSERVER}${PS_DSP_BRANCH} ||
+     fatal "svn cp ${SVNSERVER}${ECL_UPHWAPI} ${SVNSERVER}${PS_DSP_BRANCH} failed"
    ${TEST} ${SVN} rm -m "${ROTOCI_VERSION}" ${SVNSERVER}${PS_DSP_BRANCH}/ECL || warn "svn rm ${SVNSERVER}${PS_DSP_BRANCH}/ECL failed"
    log "DONE"
 }
@@ -403,7 +403,7 @@ The DSPHWAPI release ${NEW_PS_DSP_BUILD} is now available. Target PS release: ${
 
 Sources:
 ${SVNDSP}/${BRANCH}/tags/${NEW_PS_DSP_SW}
-(or ${SVNSERVER}${ECL_DSPHWAPI})
+(or ${SVNSERVER}${ECL_UPHWAPI})
 
 Binaries:
 ${RELEASEPSRELREPO}/DSPHWAPI/tags/${NEW_PS_DSP_BUILD}

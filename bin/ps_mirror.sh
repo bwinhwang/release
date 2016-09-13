@@ -117,7 +117,7 @@ function find_revisions ()
    ECL_ENV=`${SVN} cat ${SVNSERVER}${ECL_VER} |grep ECL_PS_ENV= |sed "s/.*=//"` || fatal "svn cat ${SVNSERVER}${ECL_VER} failed"
    ECL_CCS=`${SVN} cat ${SVNSERVER}${ECL_VER} |grep ECL_CCS= |sed "s/.*=//"` || fatal "svn cat ${SVNSERVER}${ECL_VER} failed"
    ECL_MCU=`${SVN} cat ${SVNSERVER}${ECL_VER} |grep ECL_MCUHWAPI= |sed "s/.*=//"` || fatal "svn cat ${SVNSERVER}${ECL_VER} failed"
-   ECL_DSP=`${SVN} cat ${SVNSERVER}${ECL_VER} |grep ECL_DSPHWAPI= |sed "s/.*=//"` || fatal "svn cat ${SVNSERVER}${ECL_VER} failed"
+   ECL_DSP=`${SVN} cat ${SVNSERVER}${ECL_VER} |grep ECL_UPHWAPI= |sed "s/.*=//"` || fatal "svn cat ${SVNSERVER}${ECL_VER} failed"
    log "ECL_ENV=${ECL_ENV}"
    log "ECL_CCS=${ECL_CCS}"
    log "ECL_MCU=${ECL_MCU}"

@@ -649,7 +649,7 @@ function prepare_start()
    PS_ENV_BRANCH=`echo -e ${ECL_PS_ENV} | sed "s/@.*//" | sed "s|[^/]*$|branches/rb_${RELEASE}|"`
    PS_CCS_BRANCH=`echo -e ${ECL_CCS} | sed "s/@.*//" | sed "s|[^/]*$|branches/rb_${RELEASE}|"`
    PS_MCU_BRANCH=`echo -e ${ECL_MCUHWAPI} | sed "s/@.*//" | sed "s|[^/]*$|branches/rb_${RELEASE}|"`
-   PS_DSP_BRANCH=`echo -e ${ECL_DSPHWAPI} | sed "s/@.*//" | sed "s|[^/]*$|branches/rb_${RELEASE}|"`
+   PS_DSP_BRANCH=`echo -e ${ECL_UPHWAPI} | sed "s/@.*//" | sed "s|[^/]*$|branches/rb_${RELEASE}|"`
    ROTOCI_VERSION=`${SVN} info ${WORKAREA} | grep ^URL | sed 's/.*\///'`
 
    CONFIG_FILE=${RELEASEDIR}/${RELEASE}/config_${PROG}

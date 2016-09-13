@@ -166,10 +166,10 @@ function co_env ()
    ${SVN} export --force  ${SVNSERVER}${ECL_MCUHWAPI_BASE}/I_Interface/Platform_Env@${ECL_MCUHWAPI_REVISION} ${RELEASEDIR}/${RELEASE}/interfaces || 
      fatal "svn export ${SVNSERVER}${ECL_MCUHWAPI_BASE}/I_Interface/Platform_Env@${ECL_MCUHWAPI_REVISION} failed"
 
-   local ECL_DSPHWAPI_REVISION=`echo -e ${ECL_DSPHWAPI} | sed "s/.*@//"`
-   local ECL_DSPHWAPI_BASE=`echo -e ${ECL_DSPHWAPI} | sed "s/@.*//"`
-   ${SVN} export --force  ${SVNSERVER}${ECL_DSPHWAPI_BASE}/I_Interface/Platform_Env@${ECL_DSPHWAPI_REVISION} ${RELEASEDIR}/${RELEASE}/interfaces || 
-     fatal "svn export ${SVNSERVER}${ECL_DSPHWAPI_BASE}/I_Interface/Platform_Env@${ECL_DSPHWAPI_REVISION} failed"
+   local ECL_UPHWAPI_REVISION=`echo -e ${ECL_UPHWAPI} | sed "s/.*@//"`
+   local ECL_UPHWAPI_BASE=`echo -e ${ECL_UPHWAPI} | sed "s/@.*//"`
+   ${SVN} export --force  ${SVNSERVER}${ECL_UPHWAPI_BASE}/I_Interface/Platform_Env@${ECL_UPHWAPI_REVISION} ${RELEASEDIR}/${RELEASE}/interfaces || 
+     fatal "svn export ${SVNSERVER}${ECL_UPHWAPI_BASE}/I_Interface/Platform_Env@${ECL_UPHWAPI_REVISION} failed"
 
    for i in `find ${RELEASEDIR}/${RELEASE}/interfaces -type f | grep -v "\.svn"` ; do
       dos2unix ${i}
@@ -250,7 +250,7 @@ function create_output_files_env ()
 
       local ECL_CCS_STRIPPED=`echo ${ECL_CCS} | sed 's|/isource/svnroot/BTS_SC_CCS/||'`
       local ECL_MCU_STRIPPED=`echo ${ECL_MCUHWAPI} | sed 's|/isource/svnroot/BTS_SC_MCUHWAPI/||'`
-      local ECL_DSP_STRIPPED=`echo ${ECL_DSPHWAPI} | sed 's|/isource/svnroot/BTS_SC_DSPHWAPI/||'`
+      local ECL_DSP_STRIPPED=`echo ${ECL_UPHWAPI} | sed 's|/isource/svnroot/BTS_SC_DSPHWAPI/||'`
 
       local HEADLINE="\n\n\n============================================================\n\n"
 

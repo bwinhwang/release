@@ -142,7 +142,7 @@ function read_revisions()
    rm ${TMPDIR}/ecl_old_$$
    ENV_OLD_REV=`echo ${ECL_PS_ENV} | sed "s/.*@//"`
    CCS_OLD_REV=`echo ${ECL_CCS} | sed "s/.*@//"`
-   DSP_OLD_REV=`echo ${ECL_DSPHWAPI} | sed "s/.*@//"`
+   DSP_OLD_REV=`echo ${ECL_UPHWAPI} | sed "s/.*@//"`
    MCU_OLD_REV=`echo ${ECL_MCUHWAPI} | sed "s/.*@//"`
    LFS_OLD_VER=${ECL_PS_LFS_REL}
    [ ${ECL_PS_LRC_LSP_LFS_REL} ] && LRC_LSP_OLD_VER=${ECL_PS_LRC_LSP_LFS_REL}
@@ -154,7 +154,7 @@ function read_revisions()
    rm ${TMPDIR}/ecl_new_$$
    ENV_NEW_REV=`echo ${ECL_PS_ENV} | sed "s/.*@//"`
    CCS_NEW_REV=`echo ${ECL_CCS}  | sed "s/.*@//"`
-   DSP_NEW_REV=`echo ${ECL_DSPHWAPI} | sed "s/.*@//"`
+   DSP_NEW_REV=`echo ${ECL_UPHWAPI} | sed "s/.*@//"`
    MCU_NEW_REV=`echo ${ECL_MCUHWAPI} | sed "s/.*@//"`
    LFS_NEW_VER=${ECL_PS_LFS_REL}
    [ ${ECL_PS_LRC_LSP_LFS_REL} ] && LRC_LSP_NEW_VER=${ECL_PS_LRC_LSP_LFS_REL}
@@ -163,7 +163,7 @@ function read_revisions()
 
    ENV_REPO=`echo ${ECL_PS_ENV} | sed "s/@.*$//"`
    CCS_REPO=`echo ${ECL_CCS} | sed "s/@.*$//"`
-   DSP_REPO=`echo ${ECL_DSPHWAPI} | sed "s/@.*$//"`
+   DSP_REPO=`echo ${ECL_UPHWAPI} | sed "s/@.*$//"`
    MCU_REPO=`echo ${ECL_MCUHWAPI} | sed "s/@.*$//"`
 
    log "ENV_OLD_REV = ${ENV_OLD_REV}"

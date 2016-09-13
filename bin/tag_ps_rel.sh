@@ -165,7 +165,7 @@ function fill_db ()
    local ENV_REV=`cat ${FILE} | grep ECL_PS_ENV= | sed "s/.*@//"`
    local CCS_REV=`cat ${FILE} | grep ECL_CCS= | sed "s/.*@//"`
    local MCU_REV=`cat ${FILE} | grep ECL_MCUHWAPI= | sed "s/.*@//"`
-   local DSP_REV=`cat ${FILE} | grep ECL_DSPHWAPI= | sed "s/.*@//"`
+   local DSP_REV=`cat ${FILE} | grep ECL_UPHWAPI= | sed "s/.*@//"`
 
    curl "http://relsearch_RW:h9839prgseurg@ulegcppsmon1.emea.nsn-net.net/cgi-bin/relsearch_add.pl?Branch=${BRANCH}&RelID=${REL_TO_BE_TAGGED}&SysComp=PS_ENV&Revision=${ENV_REV}"
    curl "http://relsearch_RW:h9839prgseurg@ulegcppsmon1.emea.nsn-net.net/cgi-bin/relsearch_add.pl?Branch=${BRANCH}&RelID=${REL_TO_BE_TAGGED}&SysComp=CCS&Revision=${CCS_REV}"

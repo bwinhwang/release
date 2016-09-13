@@ -526,7 +526,7 @@ function create_bts_ps_versionfile_ext()
    echo -e "ECL_PS_MCUHWAPI=/isource/svnroot/BTS_SC_MCUHWAPI/${NEW_BRANCH_PS_MCU_SW}/tags/${NEW_PS_MCU_SW}"               >> ${FILE}
    echo -e "ECL_MCUHWAPI_BUILD=/isource/svnroot/${SHORTREPO}/MCUHWAPI/tags/${NEW_PS_MCU_BUILD}"                           >> ${FILE}
    echo -e "ECL_PS_DSPHWAPI=/isource/svnroot/BTS_SC_DSPHWAPI/${NEW_BRANCH_PS_DSP_SW}/tags/${NEW_PS_DSP_SW}"               >> ${FILE}
-   echo -e "ECL_DSPHWAPI_BUILD=/isource/svnroot/${SHORTREPO}/DSPHWAPI/tags/${NEW_PS_DSP_BUILD}"                           >> ${FILE}
+   echo -e "ECL_UPHWAPI_BUILD=/isource/svnroot/${SHORTREPO}/DSPHWAPI/tags/${NEW_PS_DSP_BUILD}"                           >> ${FILE}
 
    ${TEST} ${SVN} import ${FILE} ${PS_REL_DST}/${FNAME} -m "${ROTOCI_VERSION}" || fatal "import ${FILE} to ${PS_REL_DST}/${FNAME} failed"
    log "DONE"
@@ -616,7 +616,7 @@ function create_psrel_versionstrings ()
    findFile ${CI2RM_CCS}
    local VERSIONSTRING=`echo -e ${ORIGFILE} | sed "s|.*REL_CCS_|PS_CCS_|" | sed "s|.zip||"`
    echo -e "#define PS_REL_CCS_VERSION \"${VERSIONSTRING}\"" >> ${FILE}
-   VERSIONSTRING=`echo -e ${ECL_DSPHWAPI} | sed "s,/isource/svnroot/,," | sed "s,/,_," | sed "s,/,-,"`
+   VERSIONSTRING=`echo -e ${ECL_UPHWAPI} | sed "s,/isource/svnroot/,," | sed "s,/,_," | sed "s,/,-,"`
    echo -e "#define PS_REL_DSPHWAPI_VERSION \"${VERSIONSTRING}\"" >> ${FILE}
    VERSIONSTRING=`echo -e ${ECL_MCUHWAPI} | sed "s,/isource/svnroot/,," | sed "s,/,_," | sed "s,/,-,"`
    echo -e "#define PS_REL_MCUHWAPI_VERSION \"${VERSIONSTRING}\"" >> ${FILE}
