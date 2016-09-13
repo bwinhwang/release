@@ -225,43 +225,7 @@ function create_branch_mcu ()
    fi
 
    local SRC=${SVNMCU}/${NEWBRANCH}/trunk
-   if [[ "`${SVN} pg svn:externals ${SRC} | wc -l`" != "0" ]]; then
-      # only for old branches with externals
-      local FILE=${RELEASEDIR}/${NEWBRANCH}/mcu_sw_externals.txt
-      local DST=${RELEASEDIR}/${NEWBRANCH}/branch_mcu
-  
-      echo "/isource/svnroot/BTS_T_PS_TOOLS/StripWatcher/tags/0.6 PS_Tools/StripWatcher" > ${FILE}
-      echo "" >> ${FILE}
-      echo "/isource/svnroot/BTS_T_PS_SWBUILD/tags/${ECL_SWBUILD}/SwBuild/common SwBuild/common" >> ${FILE}
-      echo "/isource/svnroot/BTS_T_PS_SWBUILD/tags/${ECL_SWBUILD}/SwBuild/Definitions SwBuild/Definitions" >> ${FILE}
-      echo "/isource/svnroot/BTS_T_PS_SWBUILD/tags/${ECL_SWBUILD}/SwBuild/doc SwBuild/doc" >> ${FILE}
-      echo "/isource/svnroot/BTS_T_PS_SWBUILD/tags/${ECL_SWBUILD}/SwBuild/user SwBuild/user" >> ${FILE}
-      echo "/isource/svnroot/BTS_E_OSE461/tags/${ECL_OSE_461}/OSE/OSE4.6.1 OSE/OSE4.6.1" >> ${FILE}
-      echo "/isource/svnroot/BTS_E_OSE53/tags/${ECL_OSE_53}/E_External/OSE/OSE5.3 OSE/OSE5.3" >> ${FILE}
-      echo "" >> ${FILE}
-      echo "/isource/svnroot/BTS_I_GLOBAL/tags/${ECL_GLOBAL_ENV}/I_Interface/Global_Env I_Interface/Global_Env" >> ${FILE}
-      echo "/isource/svnroot/BTS_I_PS/${NEWBRANCH}/trunk/I_Interface/Platform_Env/Messages I_Interface/Platform_Env/Messages" >> ${FILE}
-      echo "/isource/svnroot/BTS_I_PS/${NEWBRANCH}/trunk/I_Interface/Platform_Env/Definitions I_Interface/Platform_Env/Definitions" >> ${FILE}
-      echo "" >> ${FILE}
-      echo "/isource/svnroot/BTS_SC_CCS/${NEWBRANCH}/trunk/I_Interface/Platform_Env/CCS_ENV I_Interface/Platform_Env/CCS_ENV" >> ${FILE}
-      echo "/isource/svnroot/BTS_SC_CCS/${NEWBRANCH}/trunk/CCS_COTS CCS_COTS" >> ${FILE}
-      echo "/isource/svnroot/BTS_SC_CCS/${NEWBRANCH}/trunk/CCS_Daemon CCS_Daemon" >> ${FILE}
-      echo "/isource/svnroot/BTS_SC_CCS/${NEWBRANCH}/trunk/CCS_Services CCS_Services" >> ${FILE}
-      echo "/isource/svnroot/BTS_SC_CCS/${NEWBRANCH}/trunk/CCS_TestCases CCS_TestCases" >> ${FILE}
-      echo "/isource/svnroot/BTS_SC_CCS/${NEWBRANCH}/trunk/CCS_Utils CCS_Utils" >> ${FILE}
 
-      if [ "${RELEASE}" ] ; then 
-         local REPO=`echo -e "${PSRELREPO}" | sed "s|https://svne1.access.nsn.com||"`
-         echo "${REPO}/CCS/tags/${PS_CCS_BUILD}/C_Platform/CCS C_Platform/CCS" >> ${FILE}
-      fi
-
-      echo "" >> ${FILE}
-      echo "/isource/svnroot/BTS_SC_DSPHWAPI/${NEWBRANCH}/trunk/I_Interface/Platform_Env/DSPHWAPI_ENV I_Interface/Platform_Env/DSPHWAPI_ENV" >> ${FILE}
- 
-      ${SVN} co --non-recursive ${SRC} ${DST} || fatal "svn co ${SRC} ${DST} failed"
-      ${SVN} propset svn:externals ${DST} -F ${FILE} || fatal "set properties 'svn:externals' failed for ${DST}"
-      ${TEST} ${SVN} ci -m "${ROTOCI_VERSION}" ${DST} || fatal "svn ci ${DST} failed"
-   fi
    log "DONE"
 }
 
@@ -269,52 +233,12 @@ function create_branch_dsp ()
 {
    log "STARTED"
    if [ "${RELEASE}" ]; then
-      createBranchFromTag ${SVNDSP} ${ECL_DSPHWAPI}
+      createBranchFromTag ${SVNDSP} ${ECL_UPHWAPI}
    else
       createBranchFromTime ${SVNDSP}
    fi
 
    local SRC=${SVNDSP}/${NEWBRANCH}/trunk
-   if [[ "`${SVN} pg svn:externals ${SRC} | wc -l`" != "0" ]]; then
-      # only for old branches with externals
-      local FILE=${RELEASEDIR}/${NEWBRANCH}/dsp_sw_externals.txt
-      local DST=${RELEASEDIR}/${NEWBRANCH}/branch_dsp
-  
-      echo "/isource/svnroot/BTS_T_PS_TOOLS/Tools/common/pyparsing-1.5.5 Tools/common/pyparsing-1.5.5" > ${FILE}
-      echo "" >> ${FILE}
-      echo "/isource/svnroot/BTS_T_PS_SWBUILD/tags/${ECL_SWBUILD}/SwBuild/common SwBuild/common" >> ${FILE}
-      echo "/isource/svnroot/BTS_T_PS_SWBUILD/tags/${ECL_SWBUILD}/SwBuild/Definitions SwBuild/Definitions" >> ${FILE}
-      echo "/isource/svnroot/BTS_T_PS_SWBUILD/tags/${ECL_SWBUILD}/SwBuild/doc SwBuild/doc" >> ${FILE}
-      echo "/isource/svnroot/BTS_T_PS_SWBUILD/tags/${ECL_SWBUILD}/SwBuild/user SwBuild/user" >> ${FILE}
-      echo "/isource/svnroot/BTS_T_BGT/tags/${ECL_DSP_BGT}/Tools/DspHwapiPacketingTools Tools/DspHwapiPacketingTools" >> ${FILE}
-      echo "" >> ${FILE}
-      echo "/isource/svnroot/BTS_T_TI_CGT/tags/${ECL_TI_CGT_FSPB}/ccs_faraday/C6000/cgtools ccs_faraday/C6000/cgtools" >> ${FILE}
-      echo "/isource/svnroot/BTS_E_TI_CSL/tags/${ECL_TI_CSL_FSPB}/ccs_faraday/C6000/csl_faraday ccs_faraday/C6000/csl_faraday" >> ${FILE}
-      echo "/isource/svnroot/BTS_E_TI_DCI/tags/${ECL_TI_DCI_FSPB}/ccs_faraday/C6000/dci ccs_faraday/C6000/dci" >> ${FILE}
-      echo "/isource/svnroot/BTS_E_TI_AET/tags/${ECL_TI_AET_FSPB}/ccs_faraday/C6000/aet ccs_faraday/C6000/aet" >> ${FILE}
-      echo "/isource/svnroot/BTS_E_OSE_CK/tags/${ECL_OSECK_4}/ose4xx ose4xx" >> ${FILE}
-      echo "" >> ${FILE}
-      echo "/isource/svnroot/BTS_T_TI_CGT/tags/${ECL_TI_CGT_NYQUIST}/ccs_nyquist/C6000/cgtools ccs_nyquist/C6000/cgtools" >> ${FILE}
-      echo "/isource/svnroot/BTS_E_TI_AET/tags/${ECL_TI_AET_NYQUIST}/ccs_nyquist/C6000/aet ccs_nyquist/C6000/aet" >> ${FILE}
-      echo "/isource/svnroot/BTS_T_TI_NYQUIST_PDK/tags/${ECL_TI_NYQUIST_PDK}/T_Tools/ccs_nyquist/packages ccs_nyquist/packages" >> ${FILE}
-      echo "/isource/svnroot/BTS_E_OSE_CK/tags/${ECL_OSECK_4_1_NY}/ose41x_n ose41x_n" >> ${FILE}
-      echo "" >> ${FILE}
-      echo "/isource/svnroot/BTS_I_GLOBAL/tags/${ECL_GLOBAL_ENV}/I_Interface/Global_Env I_Interface/Global_Env" >> ${FILE}
-      echo "/isource/svnroot/BTS_I_PS/${NEWBRANCH}/trunk/I_Interface/Platform_Env/Messages I_Interface/Platform_Env/Messages" >> ${FILE}
-      echo "/isource/svnroot/BTS_I_PS/${NEWBRANCH}/trunk/I_Interface/Platform_Env/Definitions I_Interface/Platform_Env/Definitions" >> ${FILE}
-      echo "" >> ${FILE}
-      echo "/isource/svnroot/BTS_SC_CCS/${NEWBRANCH}/trunk/I_Interface/Platform_Env/CCS_ENV I_Interface/Platform_Env/CCS_ENV" >> ${FILE}
-      echo "/isource/svnroot/BTS_SC_CCS/${NEWBRANCH}/trunk/CCS_COTS CCS_COTS" >> ${FILE}
-      echo "/isource/svnroot/BTS_SC_CCS/${NEWBRANCH}/trunk/CCS_Daemon CCS_Daemon" >> ${FILE}
-      echo "/isource/svnroot/BTS_SC_CCS/${NEWBRANCH}/trunk/CCS_Services CCS_Services" >> ${FILE}
-      echo "/isource/svnroot/BTS_SC_CCS/${NEWBRANCH}/trunk/CCS_TestCases CCS_TestCases" >> ${FILE}
-      echo "" >> ${FILE}
-      echo "/isource/svnroot/BTS_SC_MCUHWAPI/${NEWBRANCH}/trunk/HWR/Mit Tools/common/Mit" >> ${FILE}
-   
-      ${SVN} co --non-recursive ${SRC} ${DST} || fatal "svn co ${SRC} ${DST} failed"
-      ${SVN} propset svn:externals ${DST} -F ${FILE} || fatal "set properties 'svn:externals' failed for ${DST}"
-      ${TEST} ${SVN} ci -m "${ROTOCI_VERSION}" ${DST} || fatal "svn ci ${DST} failed"
-   fi
    log "DONE"
 }
 
