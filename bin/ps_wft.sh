@@ -91,6 +91,8 @@ function PRToXml ()
 {
    local TMP
    local -a ITEMS   # all lines beginning with: 'Item    :' 
+   local FIN=%FIN
+   local BCK=%BCK
    OLD_IFS=${IFS}
    IFS='
 '
@@ -99,13 +101,15 @@ function PRToXml ()
    unset ADD
    unset SUB
    for line in "${ITEMS[@]}"; do
-      if [[ "${line}" =~ "\%FIN" ]]; then
+      #if [[ "${line}" =~ "\%FIN" ]]; then
+      echo ${line}
+      if [[ "${line}" =~ ${FIN} ]]; then
          TMP=`echo "${line}" | grep "^Item    : %FIN *%PR=[A-Z0-9]*" | sed 's/^Item    : %FIN *%PR=\([A-Z0-9]*\)\(.*\)$/      <fault id=\"\1\" info=\"FINISHED">PR \1 \2<\/fault>/'`
          if [[ "${TMP}" ]]; then
             ADD=( "${ADD[@]}" "${TMP}" )
             RmEntryInArraySub "${TMP}"
          fi
-      elif [[ "${line}" =~ "\%BCK" ]]; then
+      elif [[ "${line}" =~ ${BCK} ]]; then
          TMP=`echo "${line}" | grep "^Item    : %BCK *%PR=[A-Z0-9]*" | sed 's/^Item    : %BCK *%PR=\([A-Z0-9]*\)\(.*\)$/      <fault id=\"\1\" info=\"ROLLBACK">PR \1 \2<\/fault>/'`
          if [[ "${TMP}" ]]; then
             RmEntryInArrayAdd "${TMP}"
@@ -122,6 +126,8 @@ function NFToXml ()
 {
    local TMP
    local -a ITEMS   # all lines beginning with: 'Item    :' 
+   local FIN=%FIN
+   local BCK=%BCK
    OLD_IFS=${IFS}
    IFS='
 '
@@ -130,13 +136,13 @@ function NFToXml ()
    unset ADD
    unset SUB
    for line in "${ITEMS[@]}"; do
-      if [[ "${line}" =~ "\%FIN" ]]; then
+      if [[ "${line}" =~ ${FIN} ]]; then
          TMP=`echo "${line}" | grep "^Item    : %FIN *%NF=[a-zA-Z0-9._-]*" | sed 's/^Item    : %FIN *%NF=\([a-zA-Z0-9._-]*\)\(.*\)$/      <feature id=\"\1\"> \1: NF \2<\/feature>/'`
          if [[ "${TMP}" ]]; then 
             ADD=( "${ADD[@]}" "${TMP}" )
             RmEntryInArraySub "${TMP}" 
          fi
-      elif [[ "${line}" =~ "\%BCK" ]]; then
+      elif [[ "${line}" =~ ${BCK} ]]; then
          TMP=`echo "${line}" | grep "^Item    : %BCK *%NF=[a-zA-Z0-9._-]*" | sed 's/^Item    : %BCK *%NF=\([a-zA-Z0-9._-]*\)\(.*\)$/      <feature id=\"\1\"> \1: NF \2<\/feature>/'`
          if [[ "${TMP}" ]]; then
             RmEntryInArrayAdd "${TMP}"
@@ -153,6 +159,8 @@ function CNToXml ()
 {
    local TMP
    local -a ITEMS   # all lines beginning with: 'Item    :' 
+   local FIN=%FIN
+   local BCK=%BCK
    OLD_IFS=${IFS}
    IFS='
 '
@@ -161,13 +169,13 @@ function CNToXml ()
    unset ADD
    unset SUB
    for line in "${ITEMS[@]}"; do
-      if [[ "${line}" =~ "\%FIN" ]]; then
+      if [[ "${line}" =~ ${FIN} ]]; then
          TMP=`echo "${line}" | grep "^Item    : %FIN *%CN=[a-zA-Z0-9._-]*" | sed 's/^Item    : %FIN *%CN=\([a-zA-Z0-9._-]*\)\(.*\)$/      <changenote id=\"\1\"> \1: CN \2<\/changenote>/'`
          if [[ "${TMP}" ]]; then
             ADD=( "${ADD[@]}" "${TMP}" )
             RmEntryInArraySub "${TMP}"
          fi
-      elif [[ "${line}" =~ "\%BCK" ]]; then
+      elif [[ "${line}" =~ ${BCK} ]]; then
          TMP=`echo "${line}" | grep "^Item    : %BCK *%CN=[a-zA-Z0-9._-]*" | sed 's/^Item    : %BCK *%CN=\([a-zA-Z0-9._-]*\)\(.*\)$/      <changenote id=\"\1\"> \1: CN \2<\/changenote>/'`
          if [[ "${TMP}" ]]; then
             RmEntryInArrayAdd "${TMP}"
@@ -184,6 +192,8 @@ function REMToXml ()
 {
    local TMP
    local REVB="https://psreviewboard.emea.nsn-net.net/r/"
+   local REM=%REM
+   local RB=%RB
    local -a ITEMS   # all lines beginning with: 'Item    :' 
    OLD_IFS=${IFS}
    IFS='
@@ -193,11 +203,11 @@ function REMToXml ()
    unset ADD
    unset SUB
    for line in "${ITEMS[@]}"; do
-      if [[ "${line}" =~ "\%REM" ]]; then
+      if [[ "${line}" =~ ${REM} ]]; then
          TMP=`echo "${line}" | grep "^Item    : %REM *.*" | sed 's/^Item    : %REM *\(.*\)$/\1/'`
          [[ "${TMP}" ]] && ADD=( "${ADD[@]}" "${TMP}" )
       fi
-      if [[ "${line}" =~ "\%RB" ]]; then
+      if [[ "${line}" =~ ${RB} ]]; then
          TMP=`echo "${line}" | grep "^Item    : %RB=" | sed -e "s|^Item    : %\(RB=\)\([0-9]*\).*$|\1\2 ${REVB}\2/|"`
          [[ "${TMP}" ]] && ADD=( "${ADD[@]}" "${TMP}" )
       fi

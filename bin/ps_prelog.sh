@@ -249,7 +249,7 @@ function pr_selection ()
    declare -a SUB     # all new entries (RollBack PR)
    PRToXml "${1}"
    for line in "${ADD[@]}"; do
-      echo "${line}" | sed "s/^ *<[^>]*id=\"\([^\"]*\)\".*/SCMPRELOGOUT:${2}:PR \1 ${ROLLBACK}/"
+      echo -e "${line}" | sed "s/^ *<[^>]*id=\"\([^\"]*\)\".*/SCMPRELOGOUT:${2}:PR \1 ${ROLLBACK}/"
    done
    for line in "${SUB[@]}"; do
       echo "${line}" | sed "s/^ *<[^>]*id=\"\([^\"]*\)\".*/SCMPRELOGOUT:${2}:PR \1 ROLLBACK/"

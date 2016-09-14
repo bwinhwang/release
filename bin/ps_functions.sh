@@ -579,9 +579,10 @@ function prepare_start()
 {
    log "STARTED"
    set -o pipefail
-   RESULT=`${SVN} --username psprod list ${SVNAUTH}`
-   [ "${RESULT}" = "Your_iSource_Auth_Works_OK" ] || fatal "iSource Authentication FAILED"
-   log "iSource Authentication is OK"
+   #RESULT=`${SVN} --username psprod list ${SVNAUTH}`
+   #[ "${RESULT}" = "Your_iSource_Auth_Works_OK" ] || fatal "iSource Authentication FAILED"
+   #log "iSource Authentication is OK"
+   log "iSource Authentication is skipped"
 
    RESULT=`curl -k ${WFT_CHECK} 2>/dev/null`
    [ "${RESULT}" = "File not found" ] || fatal "WFT check FAILED"
@@ -614,7 +615,7 @@ function prepare_start()
 
    findBranches
 
-   BRANCH=`echo ${CI2RM} | sed 's/.*\/isource\/svnroot\/BTS_SCM_PS\/CI2RM\///' | sed 's/\/CI2RM.*//'`
+   BRANCH=`echo ${CI2RM} | sed 's/.*\/isource\/svnroot\/LRC_SCM_PS\/CI2RM\///' | sed 's/\/CI2RM.*//'`
    log "BRANCH: ${BRANCH}"
 
    findBaselines ${BASE}

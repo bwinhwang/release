@@ -37,7 +37,7 @@ if (!defined $ARGV[2])
   exit(-1);
 }
 
-my $log = `svn log -v -g --xml -r$ARGV[1]:$ARGV[0] $ARGV[2]`;
+my $log = `svn --username=ca_hzpsscm --password=hello121  log -v -g --xml -r$ARGV[1]:$ARGV[0] $ARGV[2]`;
 if ( $? != 0 ) { exit 1 }
 
 my $ref;
