@@ -107,8 +107,8 @@ function findPsRelRepo ()
    PSRELREPO="${SVNPSREPOURL}/BTS_D_PS_REL_${NUM}"
    log "old PSRELREPO to be checked: ${PSRELREPO}"
 
-   ${SVN} ls ${SVNPSREPOURL}/branches/${PSREL} 1>/dev/null 2>/dev/null || NUM=`echo "${PSREL}" | sed "s/.*PS_REL_20[0-9A-Z]\([0-9]_[0-9][0-9]\)_.*/201\1/"`
-   PSRELREPO="${SVNURL}/BTS_D_PS_REL_${NUM}"
+   ${SVN} ls ${PSRELREPO}/branches/${PSREL} 1>/dev/null 2>/dev/null || NUM=`echo "${PSREL}" | sed "s/.*PS_REL_20[0-9A-Z]\([0-9]_[0-9][0-9]\)_.*/201\1/"`
+   PSRELREPO="${SVNPSREPOURL}/BTS_D_PS_REL_${NUM}"
 
    log "new PSRELREPO to be used   : ${PSRELREPO}"
 }
