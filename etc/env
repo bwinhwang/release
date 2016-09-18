@@ -26,6 +26,7 @@ export SVN="svn --username=binhwang --password=wbh@201608  --trust-server-cert -
 #export SVN="svn --username=ca_hzpsscm --password=hello121  --trust-server-cert --non-interactive" # path will be set with setsee
 export SVNSERVER="http://beisop60.china.nsn-net.net"
 export SVNURL="${SVNSERVER}/isource/svnroot"
+export SVNPSREPOURL="https://svne1.access.nsn.com/isource/svnroot"
 export SVNAUTH="${SVNURL}/test-isource-auth"           # Authentication
 
 export SNVGLOBAL="${SVNURL}/BTS_I_GLOBAL"
