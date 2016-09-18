@@ -22,8 +22,9 @@ export SHARE=/build/ltesdkroot/Platforms
 export PSSHARE=${SHARE}/PS_REL
 export LFSSHARE=${SHARE}/PS_LFS_REL
 
-export SVN="svn --trust-server-cert --non-interactive" # path will be set with setsee
-export SVNSERVER="https://svne1.access.nsn.com"
+export SVN="svn --username=binhwang --password=wbh@201608  --trust-server-cert --non-interactive" # path will be set with setsee
+#export SVN="svn --username=ca_hzpsscm --password=hello121  --trust-server-cert --non-interactive" # path will be set with setsee
+export SVNSERVER="http://beisop60.china.nsn-net.net"
 export SVNURL="${SVNSERVER}/isource/svnroot"
 export SVNAUTH="${SVNURL}/test-isource-auth"           # Authentication
 
@@ -38,13 +39,13 @@ export SVNPSREL13="${SVNURL}/BTS_D_PS_REL_2013"        # CCS, DSPHWAPI, MCUHWAPI
 export SVNPTSW12="${SVNURL}/BTS_D_PTSW_2012"           # Production/Testing for Factory
 export SVNPTSW13="${SVNURL}/BTS_D_PTSW_2013"           # Production/Testing for Factory
 
-export SVNPS="${SVNURL}/BTS_SCM_PS"                    # platform ci2rm, ecl
+export SVNPS="${SVNURL}/LRC_SCM_PS"                    # platform ci2rm, ecl
 export SVNRPECL="${SVNURL}/BTS_SCM_RP_ECL"             # Radio Platform ECL
-export SVNENV="${SVNURL}/BTS_I_PS"                     # CCS_ENV, DSPHWAPI_ENV, MCUHWAPI_ENV, Definition , Message
+export SVNENV="${SVNURL}/LRC_I_PS"                     # CCS_ENV, DSPHWAPI_ENV, MCUHWAPI_ENV, Definition , Message
 
-export SVNCCS="${SVNURL}/BTS_SC_CCS"
-export SVNMCU="${SVNURL}/BTS_SC_MCUHWAPI"
-export SVNDSP="${SVNURL}/BTS_SC_DSPHWAPI"
+export SVNCCS="${SVNURL}/LRC_SC_CCS"
+export SVNMCU="${SVNURL}/LRC_SC_MCUHWAPI"
+export SVNDSP="${SVNURL}/LRC_SC_UPHWAPI"
 
 export SVNDLFS="${SVNURL}/BTS_D_SC_LFS"                # Delivery Repositories  
 export SVNDPNS="${SVNURL}/PNS_D_SC_LFS"
