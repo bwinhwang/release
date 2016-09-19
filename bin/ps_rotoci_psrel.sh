@@ -52,7 +52,7 @@ function call_function ()
       create_ci2rm )                  create_ci2rm;                  FCT_PTR="create_ecl";;
       create_ecl )                    create_ecl;                    FCT_PTR="create_part_list";;
       create_part_list )              create_part_list;              FCT_PTR="create_externals_psrel";;
-      create_externals_psrel )        create_externals_psrel;        FCT_PTR="trigger_wft_pspit";;
+      create_externals_psrel )        create_externals_psrel;        FCT_PTR="completed";;
       trigger_wft_pspit )             trigger_wft_pspit;             FCT_PTR="trigger_wft_psrel";; 
       trigger_wft_psrel )             trigger_wft_psrel;             FCT_PTR="create_pit_file";;
       create_pit_file )               create_pit_file;               FCT_PTR="completed";;

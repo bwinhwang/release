@@ -650,7 +650,7 @@ function trigger_wft_pspit ()
    log "NEW_PS_PIT=${NEW_PS_PIT}"
    log "RELNOTEXMLPSPIT=${RELNOTEXMLPSPIT}"
    create_xml_file_pspit
-#triggerWft ${PS_PIT} ${NEW_PS_PIT} "" ${RELNOTEXMLPSPIT}
+  triggerWft ${PS_PIT} ${NEW_PS_PIT} "" ${RELNOTEXMLPSPIT}
    log "DONE"
 }
 
