@@ -519,13 +519,13 @@ function create_bts_ps_versionfile_ext()
    [[ ${ECL_TI_AET_K2} ]] && echo -e "ECL_TI_AET_K2=/isource/svnroot/BTS_E_TI_AET/tags/${ECL_TI_AET_K2}"                  >> ${FILE}
    echo -e ""                                                                                                             >> ${FILE}
    echo -e "ECL_GLOBAL_ENV=/isource/svnroot/BTS_I_GLOBAL/tags/${ECL_GLOBAL_ENV}"                                          >> ${FILE}
-   echo -e "ECL_PS_ENV=/isource/svnroot/BTS_I_PS/${NEW_BRANCH_PS_ENV}/tags/${NEW_PS_ENV}"                                 >> ${FILE}
+   echo -e "ECL_PS_ENV=/isource/svnroot/LRC_I_PS/${NEW_BRANCH_PS_ENV}/tags/${NEW_PS_ENV}"                                 >> ${FILE}
    echo -e ""                                                                                                             >> ${FILE}
-   echo -e "ECL_PS_CCS=/isource/svnroot/BTS_SC_CCS/${NEW_BRANCH_PS_CCS_SW}/tags/${NEW_PS_CCS_SW}"                         >> ${FILE}
+   echo -e "ECL_PS_CCS=/isource/svnroot/LRC_SC_CCS/${NEW_BRANCH_PS_CCS_SW}/tags/${NEW_PS_CCS_SW}"                         >> ${FILE}
    echo -e "ECL_CCS_BUILD=/isource/svnroot/${SHORTREPO}/CCS/tags/${NEW_PS_CCS_BUILD}"                                     >> ${FILE}
-   echo -e "ECL_PS_MCUHWAPI=/isource/svnroot/BTS_SC_MCUHWAPI/${NEW_BRANCH_PS_MCU_SW}/tags/${NEW_PS_MCU_SW}"               >> ${FILE}
+   echo -e "ECL_PS_MCUHWAPI=/isource/svnroot/LRC_SC_MCUHWAPI/${NEW_BRANCH_PS_MCU_SW}/tags/${NEW_PS_MCU_SW}"               >> ${FILE}
    echo -e "ECL_MCUHWAPI_BUILD=/isource/svnroot/${SHORTREPO}/MCUHWAPI/tags/${NEW_PS_MCU_BUILD}"                           >> ${FILE}
-   echo -e "ECL_PS_DSPHWAPI=/isource/svnroot/BTS_SC_DSPHWAPI/${NEW_BRANCH_PS_DSP_SW}/tags/${NEW_PS_DSP_SW}"               >> ${FILE}
+   echo -e "ECL_PS_DSPHWAPI=/isource/svnroot/LRC_SC_DSPHWAPI/${NEW_BRANCH_PS_DSP_SW}/tags/${NEW_PS_DSP_SW}"               >> ${FILE}
    echo -e "ECL_UPHWAPI_BUILD=/isource/svnroot/${SHORTREPO}/DSPHWAPI/tags/${NEW_PS_DSP_BUILD}"                           >> ${FILE}
 
    ${TEST} ${SVN} import ${FILE} ${PS_REL_DST}/${FNAME} -m "${ROTOCI_VERSION}" || fatal "import ${FILE} to ${PS_REL_DST}/${FNAME} failed"
@@ -581,7 +581,7 @@ function create_externals_psrel()
    local DST=${RELEASEDIR}/${RELEASE}/${RELEASE}
 
    [[ "${NEW_PS_ENV}" =~ "PS_ENV_" ]] || fatal "PS_ENV not defined"
-   echo "/isource/svnroot/BTS_I_PS/${NEW_BRANCH_PS_ENV}/tags/${NEW_PS_ENV}/I_Interface I_Interface" > ${FILE}
+   echo "/isource/svnroot/LRC_I_PS/${NEW_BRANCH_PS_ENV}/tags/${NEW_PS_ENV}/I_Interface I_Interface" > ${FILE}
    ${SVN} co --non-recursive ${SRC} ${DST}
    ${SVN} propset svn:externals ${DST} -F ${FILE} || fatal "set properties 'svn:externals' failed for ${DST}"
    ${SVN} ci -m "${ROTOCI_VERSION}" ${DST} || fatal "svn ci failed" 
@@ -650,7 +650,7 @@ function trigger_wft_pspit ()
    log "NEW_PS_PIT=${NEW_PS_PIT}"
    log "RELNOTEXMLPSPIT=${RELNOTEXMLPSPIT}"
    create_xml_file_pspit
-   triggerWft ${PS_PIT} ${NEW_PS_PIT} "" ${RELNOTEXMLPSPIT}
+#triggerWft ${PS_PIT} ${NEW_PS_PIT} "" ${RELNOTEXMLPSPIT}
    log "DONE"
 }
 
