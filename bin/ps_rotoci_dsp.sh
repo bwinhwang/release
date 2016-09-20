@@ -43,7 +43,7 @@ function call_function ()
       tag_dsp_sw )                    tag_dsp_sw;                    FCT_PTR="define_dsp_build";;
       define_dsp_build )              define_dsp_build;              FCT_PTR="tag_dsp_build";;
       tag_dsp_build )                 tag_dsp_build;                 FCT_PTR="create_output_files_dsp_sw";;
-      create_output_files_dsp_sw )    create_output_files_dsp_sw;    FCT_PTR="trigger_wft_dsp_sw";; 
+      create_output_files_dsp_sw )    create_output_files_dsp_sw;    FCT_PTR="create_output_files_dsp_build";; 
       trigger_wft_dsp_sw )            trigger_wft_dsp_sw;            FCT_PTR="create_output_files_dsp_build";;
       create_output_files_dsp_build ) create_output_files_dsp_build; FCT_PTR="completed";; 
       trigger_wft_dsp_build )         trigger_wft_dsp_build;         FCT_PTR="send_mail_dsp";;

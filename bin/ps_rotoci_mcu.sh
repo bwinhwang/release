@@ -43,7 +43,7 @@ function call_function ()
       tag_mcu_sw )                    tag_mcu_sw;                    FCT_PTR="define_mcu_build";;
       define_mcu_build )              define_mcu_build;              FCT_PTR="tag_mcu_build";;
       tag_mcu_build )                 tag_mcu_build;                 FCT_PTR="create_output_files_mcu_sw";;
-      create_output_files_mcu_sw )    create_output_files_mcu_sw;    FCT_PTR="trigger_wft_mcu_sw";; 
+      create_output_files_mcu_sw )    create_output_files_mcu_sw;    FCT_PTR="create_output_files_mcu_build";; 
       trigger_wft_mcu_sw )            trigger_wft_mcu_sw;            FCT_PTR="create_output_files_mcu_build";;
       create_output_files_mcu_build ) create_output_files_mcu_build; FCT_PTR="completed";; 
       trigger_wft_mcu_build )         trigger_wft_mcu_build;         FCT_PTR="send_mail_mcu";;

@@ -248,9 +248,9 @@ function create_output_files_env ()
       local RELNOTEHTMLPSENV="${RELEASEDIR}/${RELEASE}/svn_data_${NEW_PS_ENV}.html"
       local RELNOTETXTPSENV="${RELEASEDIR}/${RELEASE}/svn_data_${NEW_PS_ENV}.txt"
 
-      local ECL_CCS_STRIPPED=`echo ${ECL_CCS} | sed 's|/isource/svnroot/BTS_SC_CCS/||'`
-      local ECL_MCU_STRIPPED=`echo ${ECL_MCUHWAPI} | sed 's|/isource/svnroot/BTS_SC_MCUHWAPI/||'`
-      local ECL_DSP_STRIPPED=`echo ${ECL_UPHWAPI} | sed 's|/isource/svnroot/BTS_SC_DSPHWAPI/||'`
+      local ECL_CCS_STRIPPED=`echo ${ECL_CCS} | sed 's|/isource/svnroot/LRC_SC_CCS/||'`
+      local ECL_MCU_STRIPPED=`echo ${ECL_MCUHWAPI} | sed 's|/isource/svnroot/LRC_SC_MCUHWAPI/||'`
+      local ECL_DSP_STRIPPED=`echo ${ECL_UPHWAPI} | sed 's|/isource/svnroot/LRC_SC_UPHWAPI/||'`
 
       local HEADLINE="\n\n\n============================================================\n\n"
 
