@@ -366,8 +366,8 @@ function getBaselinesForXml ()
       <baseline auto_create=\"true\" name=\"TI_CGT_K2\">${ECL_TI_CGT_K2}</baseline>"`
    [[ ${ECL_TI_AET_K2} ]] && XMLBASELINES=`echo "${XMLBASELINES}
       <baseline auto_create=\"true\" name=\"TI_AET_K2\">${ECL_TI_AET_K2}</baseline>"`
-   [[ ${ROTOCI_VERSION} ]] && XMLBASELINES=`echo "${XMLBASELINES}
-      <baseline auto_create=\"true\" name=\"ROTOCI\">${ROTOCI_VERSION}</baseline>"`
+   [[ ${ROTOLRC_VERSION} ]] && XMLBASELINES=`echo "${XMLBASELINES}
+      <baseline auto_create=\"true\" name=\"ROTOLRC\">${ROTOLRC_VERSION}</baseline>"`
    echo "${XMLBASELINES}"
 }
 

@@ -89,7 +89,7 @@ function create_xml_file_env ()
    echo "  </revertedCorrectedFaults>" >> ${RELNOTEXMLPSENV}
    echo "  <baselines>" >> ${RELNOTEXMLPSENV}
    echo "    <baseline name=\"GLOBAL_ENV\">${ECL_GLOBAL_ENV}</baseline>" >> ${RELNOTEXMLPSENV}
-   echo "    <baseline auto_create=\"true\" name=\"ROTOCI\">${ROTOCI_VERSION}</baseline>" >> ${RELNOTEXMLPSENV}
+   echo "    <baseline auto_create=\"true\" name=\"ROTOLRC\">${ROTOLRC_VERSION}</baseline>" >> ${RELNOTEXMLPSENV}
    echo "  </baselines>" >> ${RELNOTEXMLPSENV}
    echo "  <notes></notes>" >> ${RELNOTEXMLPSENV}
    echo "  <changenotes>" >> ${RELNOTEXMLPSENV}
@@ -134,12 +134,12 @@ function branch_env ()
    ${SVN} ls ${SVNENV}/${BASEBRANCH}/tags/${PS_ENV} 1>/dev/null 2>/dev/null ||
      fatal "${SVNENV}/${BASEBRANCH}/tags/${PS_ENV} does not exist in subversion";
 
-   ${SVN} ls ${SVNSERVER}${PS_ENV_BRANCH} 1>/dev/null 2>/dev/null && ${TEST} ${SVN} rm -m "${ROTOCI_VERSION}" ${SVNSERVER}${PS_ENV_BRANCH}
-   ${TEST} ${SVN} cp --parents -m "${ROTOCI_VERSION}" ${SVNSERVER}${ECL_PS_ENV} ${SVNSERVER}${PS_ENV_BRANCH} || 
-     ${TEST} ${SVN} cp --parents -m "${ROTOCI_VERSION}" ${SVNSERVER}${ECL_PS_ENV} ${SVNSERVER}${PS_ENV_BRANCH} || 
+   ${SVN} ls ${SVNSERVER}${PS_ENV_BRANCH} 1>/dev/null 2>/dev/null && ${TEST} ${SVN} rm -m "${ROTOLRC_VERSION}" ${SVNSERVER}${PS_ENV_BRANCH}
+   ${TEST} ${SVN} cp --parents -m "${ROTOLRC_VERSION}" ${SVNSERVER}${ECL_PS_ENV} ${SVNSERVER}${PS_ENV_BRANCH} || 
+     ${TEST} ${SVN} cp --parents -m "${ROTOLRC_VERSION}" ${SVNSERVER}${ECL_PS_ENV} ${SVNSERVER}${PS_ENV_BRANCH} || 
      fatal "svn cp ${SVNSERVER}${ECL_PS_ENV} ${SVNSERVER}${PS_ENV_BRANCH} failed"
    for i in `${SVN} ls ${SVNENV}/${BASEBRANCH}/tags/${PS_ENV}/I_Interface/Platform_Env | grep -v Messages | grep -v Definitions` ; do
-      ${TEST} ${SVN} cp --parents -m "${ROTOCI_VERSION}" ${SVNENV}/${BASEBRANCH}/tags/${PS_ENV}/I_Interface/Platform_Env/${i} ${SVNSERVER}${PS_ENV_BRANCH}/I_Interface/Platform_Env ||
+      ${TEST} ${SVN} cp --parents -m "${ROTOLRC_VERSION}" ${SVNENV}/${BASEBRANCH}/tags/${PS_ENV}/I_Interface/Platform_Env/${i} ${SVNSERVER}${PS_ENV_BRANCH}/I_Interface/Platform_Env ||
         fatal "svn cp ${SVNENV}/${BASEBRANCH}/tags/${PS_ENV}/I_Interface/Platform_Env/${i} ${SVNSERVER}${PS_ENV_BRANCH}/I_Interface/Platform_Env failed"
    done
 
@@ -201,7 +201,7 @@ function update_env ()
    log "STARTED"
    echo FCT_PTR=${FCT_PTR} > ${FCT_PTR_FILE}
    sync_env
-   ${TEST} ${SVN} ci -m "${ROTOCI_VERSION}" ${RELEASEDIR}/${RELEASE}/co_env || fatal "svn ci failed"
+   ${TEST} ${SVN} ci -m "${ROTOLRC_VERSION}" ${RELEASEDIR}/${RELEASE}/co_env || fatal "svn ci failed"
    log "DONE"
 }
 
@@ -316,7 +316,7 @@ PS SCM"
 function check_env ()
 {
    log "STARTED"
-   local ENV_FILE=${RELEASEDIR}/${RELEASE}/config_ps_rotoci_env.sh
+   local ENV_FILE=${RELEASEDIR}/${RELEASE}/config_ps_ROTOLRC_env.sh
    while [ ! -r "${ENV_FILE}" ]; do
       log "waiting for ${ENV_FILE}"
       sleep 60
@@ -329,7 +329,7 @@ function check_env ()
 
 function check_env_completed ()
 {
-   local ENV_FILE=${RELEASEDIR}/${RELEASE}/fctptr_ps_rotoci_env.sh
+   local ENV_FILE=${RELEASEDIR}/${RELEASE}/fctptr_ps_ROTOLRC_env.sh
    grep completed ${ENV_FILE} > /dev/null
    while [ "$?" != "0" ]; do
       log "waiting for ENV completed"

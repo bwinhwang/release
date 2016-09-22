@@ -34,7 +34,7 @@ function create_xml_file_mcu_sw ()
    echo "    <baseline name=\"GLOBAL_ENV\">${ECL_GLOBAL_ENV}</baseline>" >> ${RELNOTEXMLPSMCUSW}
    echo "    <baseline name=\"PS_ENV\">${NEW_PS_ENV}</baseline>" >> ${RELNOTEXMLPSMCUSW}
    echo "    <baseline name=\"CCS_SW\">${NEW_PS_CCS_SW}</baseline>" >> ${RELNOTEXMLPSMCUSW}
-   echo "    <baseline auto_create=\"true\" name=\"ROTOCI\">${ROTOCI_VERSION}</baseline>" >> ${RELNOTEXMLPSMCUSW}
+   echo "    <baseline auto_create=\"true\" name=\"ROTOLRC\">${ROTOLRC_VERSION}</baseline>" >> ${RELNOTEXMLPSMCUSW}
    echo "  </baselines>" >> ${RELNOTEXMLPSMCUSW}
    echo "  <notes></notes>" >> ${RELNOTEXMLPSMCUSW}
    echo "  <changenotes></changenotes>" >> ${RELNOTEXMLPSMCUSW}
@@ -151,11 +151,11 @@ function branch_mcu_sw ()
 {
    log "STARTED"
    echo FCT_PTR=${FCT_PTR} > ${FCT_PTR_FILE}
-   ${SVN} ls ${SVNSERVER}${PS_MCU_BRANCH} 1>/dev/null 2>/dev/null && ${TEST} ${SVN} rm -m "${ROTOCI_VERSION}" ${SVNSERVER}${PS_MCU_BRANCH}
-   ${TEST} ${SVN} cp --parents -m "${ROTOCI_VERSION}" ${SVNSERVER}${ECL_MCUHWAPI} ${SVNSERVER}${PS_MCU_BRANCH} ||
-     ${TEST} ${SVN} cp --parents -m "${ROTOCI_VERSION}" ${SVNSERVER}${ECL_MCUHWAPI} ${SVNSERVER}${PS_MCU_BRANCH} ||
+   ${SVN} ls ${SVNSERVER}${PS_MCU_BRANCH} 1>/dev/null 2>/dev/null && ${TEST} ${SVN} rm -m "${ROTOLRC_VERSION}" ${SVNSERVER}${PS_MCU_BRANCH}
+   ${TEST} ${SVN} cp --parents -m "${ROTOLRC_VERSION}" ${SVNSERVER}${ECL_MCUHWAPI} ${SVNSERVER}${PS_MCU_BRANCH} ||
+     ${TEST} ${SVN} cp --parents -m "${ROTOLRC_VERSION}" ${SVNSERVER}${ECL_MCUHWAPI} ${SVNSERVER}${PS_MCU_BRANCH} ||
      fatal "svn cp ${SVNSERVER}${ECL_MCUHWAPI} ${SVNSERVER}${PS_MCU_BRANCH} failed"
-   ${TEST} ${SVN} rm -m "${ROTOCI_VERSION}" ${SVNSERVER}${PS_MCU_BRANCH}/ECL || warn "svn rm ${SVNSERVER}${PS_MCU_BRANCH}/ECL failed"
+   ${TEST} ${SVN} rm -m "${ROTOLRC_VERSION}" ${SVNSERVER}${PS_MCU_BRANCH}/ECL || warn "svn rm ${SVNSERVER}${PS_MCU_BRANCH}/ECL failed"
    log "DONE"
 }
 
@@ -356,7 +356,7 @@ PS SCM"
 function check_mcu ()
 {
    log "STARTED"
-   local MCU_FILE=${RELEASEDIR}/${RELEASE}/config_ps_rotoci_mcu.sh
+   local MCU_FILE=${RELEASEDIR}/${RELEASE}/config_ps_ROTOLRC_mcu.sh
    while [ ! -r "${MCU_FILE}" ]; do
       log "waiting for ${MCU_FILE}"
       sleep 60
@@ -374,7 +374,7 @@ function check_mcu ()
 
 function check_mcu_completed ()
 {
-   local MCU_FILE=${RELEASEDIR}/${RELEASE}/fctptr_ps_rotoci_mcu.sh
+   local MCU_FILE=${RELEASEDIR}/${RELEASE}/fctptr_ps_ROTOLRC_mcu.sh
    grep completed ${MCU_FILE} > /dev/null
    while [ "$?" != "0" ]; do
       log "waiting for MCU completed"

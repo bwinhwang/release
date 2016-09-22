@@ -34,7 +34,7 @@ function create_xml_file_dsp_sw ()
    echo "    <baseline name=\"GLOBAL_ENV\">${ECL_GLOBAL_ENV}</baseline>" >> ${RELNOTEXMLPSDSPSW}
    echo "    <baseline name=\"PS_ENV\">${NEW_PS_ENV}</baseline>" >> ${RELNOTEXMLPSDSPSW}
    echo "    <baseline name=\"CCS_SW\">${NEW_PS_CCS_SW}</baseline>" >> ${RELNOTEXMLPSDSPSW}
-   echo "    <baseline auto_create=\"true\" name=\"ROTOCI\">${ROTOCI_VERSION}</baseline>" >> ${RELNOTEXMLPSDSPSW}
+   echo "    <baseline auto_create=\"true\" name=\"ROTOLRC\">${ROTOLRC_VERSION}</baseline>" >> ${RELNOTEXMLPSDSPSW}
    echo "  </baselines>" >> ${RELNOTEXMLPSDSPSW}
    echo "  <notes></notes>" >> ${RELNOTEXMLPSDSPSW}
    echo "  <changenotes></changenotes>" >> ${RELNOTEXMLPSDSPSW}
@@ -184,11 +184,11 @@ function branch_dsp_sw ()
 {
    log "STARTED"
    echo FCT_PTR=${FCT_PTR} > ${FCT_PTR_FILE}
-   ${SVN} ls ${SVNSERVER}${PS_DSP_BRANCH} 1>/dev/null 2>/dev/null && ${TEST} ${SVN} rm -m "${ROTOCI_VERSION}" ${SVNSERVER}${PS_DSP_BRANCH}
-   ${TEST} ${SVN} cp --parents -m "${ROTOCI_VERSION}" ${SVNSERVER}${ECL_UPHWAPI} ${SVNSERVER}${PS_DSP_BRANCH} ||
-     ${TEST} ${SVN} cp --parents -m "${ROTOCI_VERSION}" ${SVNSERVER}${ECL_UPHWAPI} ${SVNSERVER}${PS_DSP_BRANCH} ||
+   ${SVN} ls ${SVNSERVER}${PS_DSP_BRANCH} 1>/dev/null 2>/dev/null && ${TEST} ${SVN} rm -m "${ROTOLRC_VERSION}" ${SVNSERVER}${PS_DSP_BRANCH}
+   ${TEST} ${SVN} cp --parents -m "${ROTOLRC_VERSION}" ${SVNSERVER}${ECL_UPHWAPI} ${SVNSERVER}${PS_DSP_BRANCH} ||
+     ${TEST} ${SVN} cp --parents -m "${ROTOLRC_VERSION}" ${SVNSERVER}${ECL_UPHWAPI} ${SVNSERVER}${PS_DSP_BRANCH} ||
      fatal "svn cp ${SVNSERVER}${ECL_UPHWAPI} ${SVNSERVER}${PS_DSP_BRANCH} failed"
-   ${TEST} ${SVN} rm -m "${ROTOCI_VERSION}" ${SVNSERVER}${PS_DSP_BRANCH}/ECL || warn "svn rm ${SVNSERVER}${PS_DSP_BRANCH}/ECL failed"
+   ${TEST} ${SVN} rm -m "${ROTOLRC_VERSION}" ${SVNSERVER}${PS_DSP_BRANCH}/ECL || warn "svn rm ${SVNSERVER}${PS_DSP_BRANCH}/ECL failed"
    log "DONE"
 }
 
@@ -235,7 +235,7 @@ function create_externals_dsp_sw ()
    
       ${SVN} co --non-recursive ${SRC} ${DST}
       ${SVN} propset svn:externals ${DST} -F ${FILE} || fatal "set properties 'svn:externals' failed for ${DST}"
-      ${SVN} ci -m "${ROTOCI_VERSION}" ${DST} || fatal "svn ci failed"
+      ${SVN} ci -m "${ROTOLRC_VERSION}" ${DST} || fatal "svn ci failed"
    fi
    log "DONE"
 }
@@ -440,7 +440,7 @@ PS SCM"
 function check_dsp ()
 {
    log "STARTED"
-   local DSP_FILE=${RELEASEDIR}/${RELEASE}/config_ps_rotoci_dsp.sh
+   local DSP_FILE=${RELEASEDIR}/${RELEASE}/config_ps_ROTOLRC_dsp.sh
    while [ ! -r "${DSP_FILE}" ]; do
       log "waiting for ${DSP_FILE}"
       sleep 60
@@ -458,7 +458,7 @@ function check_dsp ()
 
 function check_dsp_completed ()
 {
-   local DSP_FILE=${RELEASEDIR}/${RELEASE}/fctptr_ps_rotoci_dsp.sh
+   local DSP_FILE=${RELEASEDIR}/${RELEASE}/fctptr_ps_ROTOLRC_dsp.sh
    grep completed ${DSP_FILE} > /dev/null
    while [ "$?" != "0" ]; do
       log "waiting for DSP completed"

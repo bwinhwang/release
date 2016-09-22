@@ -118,58 +118,58 @@ function combine_psrel()
 
    PS_REL_DST="${RELEASEPSRELREPO}/branches/${RELEASE}"
 
-   ${SVN} ls ${PS_REL_DST} 1>/dev/null 2>/dev/null && ${TEST} ${SVN} rm ${PS_REL_DST} -m "${ROTOCI_VERSION}" 
-   ${TEST} ${SVN} mkdir ${PS_REL_DST} -m "${ROTOCI_VERSION}" --parents || 
-      ${TEST} ${SVN} mkdir ${PS_REL_DST} -m "${ROTOCI_VERSION}" --parents || 
+   ${SVN} ls ${PS_REL_DST} 1>/dev/null 2>/dev/null && ${TEST} ${SVN} rm ${PS_REL_DST} -m "${ROTOLRC_VERSION}" 
+   ${TEST} ${SVN} mkdir ${PS_REL_DST} -m "${ROTOLRC_VERSION}" --parents || 
+      ${TEST} ${SVN} mkdir ${PS_REL_DST} -m "${ROTOLRC_VERSION}" --parents || 
       fatal "mkdir ${PS_REL_DST} failed"
 
    local SRC="${RELEASEPSRELREPO}/DSPHWAPI/tags/${NEW_PS_DSP_BUILD}"
-   ${TEST} ${SVN} cp ${SRC}/C_Platform ${PS_REL_DST} -m "${ROTOCI_VERSION}" || fatal "svn cp ${SRC}/C_Platform/DSPHWAPI ${PS_REL_DST}/C_Platform failed"
+   ${TEST} ${SVN} cp ${SRC}/C_Platform ${PS_REL_DST} -m "${ROTOLRC_VERSION}" || fatal "svn cp ${SRC}/C_Platform/DSPHWAPI ${PS_REL_DST}/C_Platform failed"
    ${SVN} ls ${SRC}/ccs_faraday 1>/dev/null 2>/dev/null && 
-     ( ${TEST} ${SVN} cp ${SRC}/ccs_faraday ${PS_REL_DST} -m "${ROTOCI_VERSION}" || fatal "svn cp ${SRC}/ccs_faraday ${PS_REL_DST} failed" )
+     ( ${TEST} ${SVN} cp ${SRC}/ccs_faraday ${PS_REL_DST} -m "${ROTOLRC_VERSION}" || fatal "svn cp ${SRC}/ccs_faraday ${PS_REL_DST} failed" )
    ${SVN} ls ${SRC}/ccs_nyquist 1>/dev/null 2>/dev/null &&
-     ( ${TEST} ${SVN} cp ${SRC}/ccs_nyquist ${PS_REL_DST} -m "${ROTOCI_VERSION}" || fatal "svn cp ${SRC}/ccs_nyquist ${PS_REL_DST} failed" )
+     ( ${TEST} ${SVN} cp ${SRC}/ccs_nyquist ${PS_REL_DST} -m "${ROTOLRC_VERSION}" || fatal "svn cp ${SRC}/ccs_nyquist ${PS_REL_DST} failed" )
    ${SVN} ls ${SRC}/T_Tools 1>/dev/null 2>/dev/null &&
-     ( ${TEST} ${SVN} cp ${SRC}/T_Tools ${PS_REL_DST} -m "${ROTOCI_VERSION}" || fatal "svn cp ${SRC}/T_Tools ${PS_REL_DST} failed" )
-   ${TEST} ${SVN} cp ${SRC}/Documents ${PS_REL_DST} -m "${ROTOCI_VERSION}" || ${TEST} ${SVN} mkdir ${PS_REL_DST}/Documents -m "${ROTOCI_VERSION}" || fatal "svn mkdir ${PS_REL_DST}/Documents failed"
+     ( ${TEST} ${SVN} cp ${SRC}/T_Tools ${PS_REL_DST} -m "${ROTOLRC_VERSION}" || fatal "svn cp ${SRC}/T_Tools ${PS_REL_DST} failed" )
+   ${TEST} ${SVN} cp ${SRC}/Documents ${PS_REL_DST} -m "${ROTOLRC_VERSION}" || ${TEST} ${SVN} mkdir ${PS_REL_DST}/Documents -m "${ROTOLRC_VERSION}" || fatal "svn mkdir ${PS_REL_DST}/Documents failed"
 
    local SRC="${RELEASEPSRELREPO}/MCUHWAPI/tags/${NEW_PS_MCU_BUILD}"
-   ${TEST} ${SVN} cp ${SRC}/C_Platform/MCUHWAPI ${PS_REL_DST}/C_Platform -m "${ROTOCI_VERSION}" || fatal "svn cp ${SRC}/C_Platform/MCUHWAPI ${PS_REL_DST}/C_Platform failed"
+   ${TEST} ${SVN} cp ${SRC}/C_Platform/MCUHWAPI ${PS_REL_DST}/C_Platform -m "${ROTOLRC_VERSION}" || fatal "svn cp ${SRC}/C_Platform/MCUHWAPI ${PS_REL_DST}/C_Platform failed"
 
    ${SVN} ls ${SRC}/ApplStubs 1>/dev/null 2>/dev/null && 
-     ( ${TEST} ${SVN} cp ${SRC}/ApplStubs ${PS_REL_DST} -m "${ROTOCI_VERSION}" || fatal "svn cp ${SRC}/ApplStubs ${PS_REL_DST} failed" )
+     ( ${TEST} ${SVN} cp ${SRC}/ApplStubs ${PS_REL_DST} -m "${ROTOLRC_VERSION}" || fatal "svn cp ${SRC}/ApplStubs ${PS_REL_DST} failed" )
    ${SVN} ls ${SRC}/Build 1>/dev/null 2>/dev/null &&
-     ( ${TEST} ${SVN} cp ${SRC}/Build ${PS_REL_DST} -m "${ROTOCI_VERSION}" || fatal "svn cp ${SRC}/Build ${PS_REL_DST} failed" )
+     ( ${TEST} ${SVN} cp ${SRC}/Build ${PS_REL_DST} -m "${ROTOLRC_VERSION}" || fatal "svn cp ${SRC}/Build ${PS_REL_DST} failed" )
    ${SVN} ls ${SRC}/Hwapi 1>/dev/null 2>/dev/null &&
-     ( ${TEST} ${SVN} cp ${SRC}/Hwapi ${PS_REL_DST} -m "${ROTOCI_VERSION}" || fatal "svn cp ${SRC}/Hwapi ${PS_REL_DST} failed" )
+     ( ${TEST} ${SVN} cp ${SRC}/Hwapi ${PS_REL_DST} -m "${ROTOLRC_VERSION}" || fatal "svn cp ${SRC}/Hwapi ${PS_REL_DST} failed" )
    ${SVN} ls ${SRC}/OSE 1>/dev/null 2>/dev/null &&
-     ( ${TEST} ${SVN} cp ${SRC}/OSE ${PS_REL_DST} -m "${ROTOCI_VERSION}" || fatal "svn cp ${SRC}/OSE ${PS_REL_DST} failed" )
+     ( ${TEST} ${SVN} cp ${SRC}/OSE ${PS_REL_DST} -m "${ROTOLRC_VERSION}" || fatal "svn cp ${SRC}/OSE ${PS_REL_DST} failed" )
 
    for i in `${SVN} ls ${SRC}/C_Platform/test_autom |grep ".txt"`; do
-      ${TEST} ${SVN} cp ${SRC}/C_Platform/test_autom/${i} ${PS_REL_DST}/C_Platform/test_autom/${i} -m "${ROTOCI_VERSION}" ||
+      ${TEST} ${SVN} cp ${SRC}/C_Platform/test_autom/${i} ${PS_REL_DST}/C_Platform/test_autom/${i} -m "${ROTOLRC_VERSION}" ||
          warn "svn cp ${SRC}/C_Platform/test_autom/${i} ${PS_REL_DST}/C_Platform/test_autom/${i} failed"
    done
 
    local SRC="${RELEASEPSRELREPO}/CCS/tags/${NEW_PS_CCS_BUILD}"
    ${SVN} ls ${PS_REL_DST}/C_Platform/CCS 1>/dev/null 2>/dev/null
    if [[ $? == 0 ]]; then
-      ${TEST} ${SVN} rm ${PS_REL_DST}/C_Platform/CCS -m "${ROTOCI_VERSION}" || fatal "svn rm ${PS_REL_DST}/C_Platform/CCS failed"
-      ${TEST} ${SVN} cp ${SRC}/C_Platform/CCS ${PS_REL_DST}/C_Platform -m "${ROTOCI_VERSION}" || fatal "svn cp ${SRC}/C_Platform/CCS ${PS_REL_DST}/C_Platform failed"
+      ${TEST} ${SVN} rm ${PS_REL_DST}/C_Platform/CCS -m "${ROTOLRC_VERSION}" || fatal "svn rm ${PS_REL_DST}/C_Platform/CCS failed"
+      ${TEST} ${SVN} cp ${SRC}/C_Platform/CCS ${PS_REL_DST}/C_Platform -m "${ROTOLRC_VERSION}" || fatal "svn cp ${SRC}/C_Platform/CCS ${PS_REL_DST}/C_Platform failed"
       local DSPSRC="${RELEASEPSRELREPO}/DSPHWAPI/tags/${NEW_PS_DSP_BUILD}/C_Platform/CCS"
       for i in `${SVN} ls ${DSPSRC}` ; do
          for j in `${SVN} ls ${DSPSRC}/${i}` ; do
-            ${TEST} ${SVN} cp ${DSPSRC}/${i}/${j} ${PS_REL_DST}/C_Platform/CCS/${i}/${j} -m "${ROTOCI_VERSION}" || fatal "svn cp ${DSPSRC}/${i}/${j} ${PS_REL_DST}/C_Platform/CCS/${i}/${j} failed"
+            ${TEST} ${SVN} cp ${DSPSRC}/${i}/${j} ${PS_REL_DST}/C_Platform/CCS/${i}/${j} -m "${ROTOLRC_VERSION}" || fatal "svn cp ${DSPSRC}/${i}/${j} ${PS_REL_DST}/C_Platform/CCS/${i}/${j} failed"
          done
       done
    else
-      ${TEST} ${SVN} cp ${SRC}/C_Platform/CCS ${PS_REL_DST}/C_Platform -m "${ROTOCI_VERSION}" || fatal "svn cp ${SRC}/C_Platform/CCS ${PS_REL_DST}/C_Platform failed"
+      ${TEST} ${SVN} cp ${SRC}/C_Platform/CCS ${PS_REL_DST}/C_Platform -m "${ROTOLRC_VERSION}" || fatal "svn cp ${SRC}/C_Platform/CCS ${PS_REL_DST}/C_Platform failed"
    fi
    for i in `${SVN} ls ${SRC}/T_Tools 2>/dev/null` ; do
-      ${TEST} ${SVN} cp ${SRC}/T_Tools/${i} ${PS_REL_DST}/T_Tools/${i} -m "${ROTOCI_VERSION}" || fatal "svn cp ${SRC}/T_Tools/${i} ${PS_REL_DST}/T_Tools/${i} failed"
+      ${TEST} ${SVN} cp ${SRC}/T_Tools/${i} ${PS_REL_DST}/T_Tools/${i} -m "${ROTOLRC_VERSION}" || fatal "svn cp ${SRC}/T_Tools/${i} ${PS_REL_DST}/T_Tools/${i} failed"
    done
 
    for i in `${SVN} ls ${SRC}/C_Platform/CCS/TrblLogList |grep ".txt"`; do
-      ${TEST} ${SVN} cp ${SRC}/C_Platform/CCS/TrblLogList/${i} ${PS_REL_DST}/C_Platform/test_autom/${i} -m "${ROTOCI_VERSION}" ||
+      ${TEST} ${SVN} cp ${SRC}/C_Platform/CCS/TrblLogList/${i} ${PS_REL_DST}/C_Platform/test_autom/${i} -m "${ROTOLRC_VERSION}" ||
          warn "svn cp ${SRC}/C_Platform/CCS/TrblLogList/${i} ${PS_REL_DST}/C_Platform/test_autom/${i} failed"
    done
 
@@ -213,7 +213,7 @@ function create_trbl_log_list()
       echo "${TEMP}" >> ${FILE}
    fi
 
-   [ ! -f ${FILE} ] || ${TEST} ${SVN} import ${FILE} ${PS_REL_DST}/C_Platform/test_autom/${FNAME} -m "${ROTOCI_VERSION}" ||
+   [ ! -f ${FILE} ] || ${TEST} ${SVN} import ${FILE} ${PS_REL_DST}/C_Platform/test_autom/${FNAME} -m "${ROTOLRC_VERSION}" ||
       fatal "import ${FILE} to ${PS_REL_DST}/C_Platform/${FNAME} failed"
 
    log "DONE"
@@ -263,10 +263,10 @@ function create_vcf_combined ()
    echo '</versionControlFile>' >> ${OUTFILE}
    rm ${TMPDIR}/$$_*.xml
 
-   ${TEST} ${SVN} import ${OUTFILE} ${PS_REL_DST}/C_Platform/${FNAME} -m "${ROTOCI_VERSION}" || fatal "import ${OUTFILE} to ${PS_REL_DST}/C_Platform/${FNAME} failed"
-   ${TEST} ${SVN} mkdir ${PS_REL_DST}/C_Platform/versions -m "${ROTOCI_VERSION}"
+   ${TEST} ${SVN} import ${OUTFILE} ${PS_REL_DST}/C_Platform/${FNAME} -m "${ROTOLRC_VERSION}" || fatal "import ${OUTFILE} to ${PS_REL_DST}/C_Platform/${FNAME} failed"
+   ${TEST} ${SVN} mkdir ${PS_REL_DST}/C_Platform/versions -m "${ROTOLRC_VERSION}"
    sed -i -e "s|file source=\"|file source=\"../|" ${OUTFILE}
-   ${TEST} ${SVN} import ${OUTFILE} ${PS_REL_DST}/C_Platform/versions/${FNAME} -m "${ROTOCI_VERSION}" || fatal "import ${OUTFILE} to ${PS_REL_DST}/C_Platform/versions/${FNAME} failed"
+   ${TEST} ${SVN} import ${OUTFILE} ${PS_REL_DST}/C_Platform/versions/${FNAME} -m "${ROTOLRC_VERSION}" || fatal "import ${OUTFILE} to ${PS_REL_DST}/C_Platform/versions/${FNAME} failed"
    log "DONE"
 }
 
@@ -313,7 +313,7 @@ function create_ptsw_fsmr3_vcf()
 
    echo -e "</versionControllFile>" >> ${FILE}
 
-   ${TEST} ${SVN} import ${FILE} ${PS_REL_DST}/C_Platform/${FNAME} -m "${ROTOCI_VERSION}" || fatal "import ${FILE} to ${PS_REL_DST}/C_Platform/${FNAME} failed"
+   ${TEST} ${SVN} import ${FILE} ${PS_REL_DST}/C_Platform/${FNAME} -m "${ROTOLRC_VERSION}" || fatal "import ${FILE} to ${PS_REL_DST}/C_Platform/${FNAME} failed"
    log "DONE"
 }
 
@@ -347,7 +347,7 @@ function create_ptsw_fsmr4_vcf()
 
    echo -e "</versionControllFile>" >> ${FILE}
 
-   ${TEST} ${SVN} import ${FILE} ${PS_REL_DST}/C_Platform/${FNAME} -m "${ROTOCI_VERSION}" || fatal "import ${FILE} to ${PS_REL_DST}/C_Platform/${FNAME} failed"
+   ${TEST} ${SVN} import ${FILE} ${PS_REL_DST}/C_Platform/${FNAME} -m "${ROTOLRC_VERSION}" || fatal "import ${FILE} to ${PS_REL_DST}/C_Platform/${FNAME} failed"
    log "DONE"
 }
 
@@ -394,7 +394,7 @@ function create_ptsw_urec_vcf()
  
    echo -e "</versionControllFile>" >> ${FILE}
 
-   ${TEST} ${SVN} import ${FILE} ${PS_REL_DST}/C_Platform/${FNAME} -m "${ROTOCI_VERSION}" || fatal "import ${FILE} to ${PS_REL_DST}/C_Platform/${FNAME} failed"
+   ${TEST} ${SVN} import ${FILE} ${PS_REL_DST}/C_Platform/${FNAME} -m "${ROTOLRC_VERSION}" || fatal "import ${FILE} to ${PS_REL_DST}/C_Platform/${FNAME} failed"
    log "DONE"
 }
 
@@ -455,7 +455,7 @@ function create_bts_ps_versionfile()
    echo -e "PS_DSPHWAPI=${NEW_PS_DSP_SW}"                                  >> ${FILE}
    echo -e "DSPHWAPI_BUILD=${NEW_PS_DSP_BUILD}"                            >> ${FILE}
 
-   ${TEST} ${SVN} import ${FILE} ${PS_REL_DST}/${FNAME} -m "${ROTOCI_VERSION}" || fatal "import ${FILE} to ${PS_REL_DST}/${FNAME} failed"
+   ${TEST} ${SVN} import ${FILE} ${PS_REL_DST}/${FNAME} -m "${ROTOLRC_VERSION}" || fatal "import ${FILE} to ${PS_REL_DST}/${FNAME} failed"
    log "DONE"
 }
 
@@ -528,7 +528,7 @@ function create_bts_ps_versionfile_ext()
    echo -e "ECL_PS_DSPHWAPI=/isource/svnroot/LRC_SC_DSPHWAPI/${NEW_BRANCH_PS_DSP_SW}/tags/${NEW_PS_DSP_SW}"               >> ${FILE}
    echo -e "ECL_UPHWAPI_BUILD=/isource/svnroot/${SHORTREPO}/DSPHWAPI/tags/${NEW_PS_DSP_BUILD}"                           >> ${FILE}
 
-   ${TEST} ${SVN} import ${FILE} ${PS_REL_DST}/${FNAME} -m "${ROTOCI_VERSION}" || fatal "import ${FILE} to ${PS_REL_DST}/${FNAME} failed"
+   ${TEST} ${SVN} import ${FILE} ${PS_REL_DST}/${FNAME} -m "${ROTOLRC_VERSION}" || fatal "import ${FILE} to ${PS_REL_DST}/${FNAME} failed"
    log "DONE"
 }
 
@@ -546,7 +546,7 @@ function create_bts_ps_src_baselines()
    echo -e "MCU_SRC=${SVNMCU}/${NEW_BRANCH_PS_MCU_SW}/tags/${NEW_PS_MCU_SW}@${REVNUMBER}" >> ${FILE}
    REVNUMBER=`${SVN} info ${SVNDSP}/${NEW_BRANCH_PS_DSP_SW}/tags/${NEW_PS_DSP_SW} | grep "Last Changed Rev: " | sed "s|Last Changed Rev: ||"`
    echo -e "DSP_SRC=${SVNDSP}/${NEW_BRANCH_PS_DSP_SW}/tags/${NEW_PS_DSP_SW}@${REVNUMBER}" >> ${FILE}
-   ${TEST} ${SVN} import ${FILE} ${PS_REL_DST}/${FNAME} -m "${ROTOCI_VERSION}" || fatal "import ${FILE} to ${PS_REL_DST}/${FNAME} failed"
+   ${TEST} ${SVN} import ${FILE} ${PS_REL_DST}/${FNAME} -m "${ROTOLRC_VERSION}" || fatal "import ${FILE} to ${PS_REL_DST}/${FNAME} failed"
    log "DONE"
 }
 
@@ -555,9 +555,9 @@ function create_ci2rm()
    log "STARTED"
    echo FCT_PTR=${FCT_PTR} > ${FCT_PTR_FILE}
    local FNAME=CI2RM
-   local FILE=${RELEASEDIR}/${RELEASE}/CI2RM_ps_rotoci_psrel.sh
+   local FILE=${RELEASEDIR}/${RELEASE}/CI2RM_ps_ROTOLRC_psrel.sh
    local PS_REL_DST="${RELEASEPSRELREPO}/branches/${RELEASE}"
-   ${TEST} ${SVN} import ${FILE} ${PS_REL_DST}/${FNAME} -m "${ROTOCI_VERSION}" || fatal "import ${FILE} to ${PS_REL_DST}/${FNAME} failed"
+   ${TEST} ${SVN} import ${FILE} ${PS_REL_DST}/${FNAME} -m "${ROTOLRC_VERSION}" || fatal "import ${FILE} to ${PS_REL_DST}/${FNAME} failed"
    log "DONE"
 }
 
@@ -566,9 +566,9 @@ function create_ecl()
    log "STARTED"
    echo FCT_PTR=${FCT_PTR} > ${FCT_PTR_FILE}
    local FNAME=ECL
-   local FILE=${RELEASEDIR}/${RELEASE}/ECL_ps_rotoci_psrel.sh
+   local FILE=${RELEASEDIR}/${RELEASE}/ECL_ps_ROTOLRC_psrel.sh
    local PS_REL_DST="${RELEASEPSRELREPO}/branches/${RELEASE}"
-   ${TEST} ${SVN} import ${FILE} ${PS_REL_DST}/${FNAME} -m "${ROTOCI_VERSION}" || fatal "import ${FILE} to ${PS_REL_DST}/${FNAME} failed"
+   ${TEST} ${SVN} import ${FILE} ${PS_REL_DST}/${FNAME} -m "${ROTOLRC_VERSION}" || fatal "import ${FILE} to ${PS_REL_DST}/${FNAME} failed"
    log "DONE"
 }
 
@@ -584,7 +584,7 @@ function create_externals_psrel()
    echo "/isource/svnroot/LRC_I_PS/${NEW_BRANCH_PS_ENV}/tags/${NEW_PS_ENV}/I_Interface I_Interface" > ${FILE}
    ${SVN} co --non-recursive ${SRC} ${DST}
    ${SVN} propset svn:externals ${DST} -F ${FILE} || fatal "set properties 'svn:externals' failed for ${DST}"
-   ${SVN} ci -m "${ROTOCI_VERSION}" ${DST} || fatal "svn ci failed" 
+   ${SVN} ci -m "${ROTOLRC_VERSION}" ${DST} || fatal "svn ci failed" 
    log "DONE"
 }
 
@@ -622,7 +622,7 @@ function create_psrel_versionstrings ()
    echo -e "#define PS_REL_MCUHWAPI_VERSION \"${VERSIONSTRING}\"" >> ${FILE}
    echo -e "#endif" >> ${FILE}
 
-   ${TEST} ${SVN} import ${FILE} ${PS_REL_DST}/${FNAME} -m "${ROTOCI_VERSION}" || fatal "import ${FILE} to ${PS_REL_DST}/${FNAME} failed"
+   ${TEST} ${SVN} import ${FILE} ${PS_REL_DST}/${FNAME} -m "${ROTOLRC_VERSION}" || fatal "import ${FILE} to ${PS_REL_DST}/${FNAME} failed"
    log "DONE"
 }
 
@@ -634,7 +634,7 @@ function create_part_list ()
    local FILE=${RELEASEDIR}/${RELEASE}/${FNAME}
    local PS_REL_DST="${RELEASEPSRELREPO}/branches/${RELEASE}"
    ${SVN} ls -R ${PS_REL_DST} > ${FILE}
-   ${TEST} ${SVN} import ${FILE} ${PS_REL_DST}/${FNAME} -m "${ROTOCI_VERSION}" || fatal "import ${FILE} to ${PS_REL_DST}/${FNAME} failed"
+   ${TEST} ${SVN} import ${FILE} ${PS_REL_DST}/${FNAME} -m "${ROTOLRC_VERSION}" || fatal "import ${FILE} to ${PS_REL_DST}/${FNAME} failed"
    log "DONE"
 }
 
@@ -705,7 +705,7 @@ function trigger_wft_psrel()
       SUB_BUILD="${SUB_BUILD} -F sub_build[]=${NEW_PS_MCU_BUILD}"
       SUB_BUILD="${SUB_BUILD} -F sub_build[]=${NEW_PS_DSP_SW}"
       SUB_BUILD="${SUB_BUILD} -F sub_build[]=${NEW_PS_DSP_BUILD}"
-      SUB_BUILD="${SUB_BUILD} -F sub_build[]=${ROTOCI_VERSION}"
+      SUB_BUILD="${SUB_BUILD} -F sub_build[]=${ROTOLRC_VERSION}"
       CMD="${TEST} curl -s -k ${WFT_API}/increment/${RELEASE} -F xml_releasenote_id=37 -F flags[]=${FAST} -F parent=${BASE} ${SUB_BUILD} ${BRANCH_FOR} -F access_key=${WFT_KEY}"
       log "${CMD}"
       local RET=`eval "${CMD}"`
@@ -718,8 +718,8 @@ function trigger_wft_psrel()
       local CI2RMFILE=${RELEASEDIR}/${RELEASE}/CI2RM.txt
       local ECLFILE=${RELEASEDIR}/${RELEASE}/ECL.txt
       local PARTLIST=${RELEASEDIR}/${RELEASE}/PSREL_partlist.txt
-      cp ${RELEASEDIR}/${RELEASE}/CI2RM_ps_rotoci_psrel.sh ${CI2RMFILE}
-      cp ${RELEASEDIR}/${RELEASE}/ECL_ps_rotoci_psrel.sh ${ECLFILE}
+      cp ${RELEASEDIR}/${RELEASE}/CI2RM_ps_ROTOLRC_psrel.sh ${CI2RMFILE}
+      cp ${RELEASEDIR}/${RELEASE}/ECL_ps_ROTOLRC_psrel.sh ${ECLFILE}
       curl -k ${WFT_PORT}/builds/${RELEASE} -F "access_key=${WFT_KEY}" -F "build[repository_url]=${RELEASEPSRELREPO}" -X PUT
       curl -k ${WFT_PORT}/builds/${RELEASE} -F "access_key=${WFT_KEY}" -F "build[repository_branch]=tags/${RELEASE}" -X PUT
       curl -k ${WFT_PORT}/builds/${RELEASE} -F "access_key=${WFT_KEY}" -F "build[important_note]=" -X PUT  # remove Important Note

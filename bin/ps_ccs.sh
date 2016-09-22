@@ -34,7 +34,7 @@ function create_xml_file_ccs_sw ()
    echo "  <baselines>" >> ${RELNOTEXMLPSCCSSW}
    echo "    <baseline name=\"GLOBAL_ENV\">${ECL_GLOBAL_ENV}</baseline>" >> ${RELNOTEXMLPSCCSSW}
    echo "    <baseline name=\"PS_ENV\">${NEW_PS_ENV}</baseline>" >> ${RELNOTEXMLPSCCSSW}
-   echo "    <baseline auto_create=\"true\" name=\"ROTOCI\">${ROTOCI_VERSION}</baseline>" >> ${RELNOTEXMLPSCCSSW}
+   echo "    <baseline auto_create=\"true\" name=\"ROTOLRC\">${ROTOLRC_VERSION}</baseline>" >> ${RELNOTEXMLPSCCSSW}
    echo "  </baselines>" >> ${RELNOTEXMLPSCCSSW}
    echo "  <notes></notes>" >> ${RELNOTEXMLPSCCSSW}
    echo "  <changenotes></changenotes>" >> ${RELNOTEXMLPSCCSSW}
@@ -150,9 +150,9 @@ function branch_ccs_sw ()
 {
    log "STARTED"
    echo FCT_PTR=${FCT_PTR} > ${FCT_PTR_FILE}
-   ${SVN} ls ${SVNSERVER}${PS_CCS_BRANCH} 1>/dev/null 2>/dev/null && ${TEST} ${SVN} rm -m "${ROTOCI_VERSION}" ${SVNSERVER}${PS_CCS_BRANCH}
-   ${TEST} ${SVN} cp --parents -m "${ROTOCI_VERSION}" ${SVNSERVER}${ECL_CCS} ${SVNSERVER}${PS_CCS_BRANCH} ||
-     ${TEST} ${SVN} cp --parents -m "${ROTOCI_VERSION}" ${SVNSERVER}${ECL_CCS} ${SVNSERVER}${PS_CCS_BRANCH} ||
+   ${SVN} ls ${SVNSERVER}${PS_CCS_BRANCH} 1>/dev/null 2>/dev/null && ${TEST} ${SVN} rm -m "${ROTOLRC_VERSION}" ${SVNSERVER}${PS_CCS_BRANCH}
+   ${TEST} ${SVN} cp --parents -m "${ROTOLRC_VERSION}" ${SVNSERVER}${ECL_CCS} ${SVNSERVER}${PS_CCS_BRANCH} ||
+     ${TEST} ${SVN} cp --parents -m "${ROTOLRC_VERSION}" ${SVNSERVER}${ECL_CCS} ${SVNSERVER}${PS_CCS_BRANCH} ||
      fatal "svn cp ${SVNSERVER}${ECL_CCS} ${SVNSERVER}${PS_CCS_BRANCH} failed"
    log "DONE"
 }
@@ -340,7 +340,7 @@ PS SCM"
 function check_ccs ()
 {
    log "STARTED"
-   local CCS_FILE=${RELEASEDIR}/${RELEASE}/config_ps_rotoci_ccs.sh
+   local CCS_FILE=${RELEASEDIR}/${RELEASE}/config_ps_ROTOLRC_ccs.sh
    while [ ! -r "${CCS_FILE}" ]; do 
       log "waiting for ${CCS_FILE}"
       sleep 60
@@ -358,7 +358,7 @@ function check_ccs ()
 
 function check_ccs_completed ()
 {
-   local CCS_FILE=${RELEASEDIR}/${RELEASE}/fctptr_ps_rotoci_ccs.sh
+   local CCS_FILE=${RELEASEDIR}/${RELEASE}/fctptr_ps_ROTOLRC_ccs.sh
    grep completed ${CCS_FILE} > /dev/null
    while [ "$?" != "0" ]; do
       log "waiting for CCS completed"

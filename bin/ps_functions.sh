@@ -442,8 +442,8 @@ function tagIt ()
    log "NEW_TAG=${NEW_TAG}"
    local SRC=${RELEASE_BRANCH}
    local DST=${REPOSITORY}/${BRANCH}/tags/${NEW_TAG}
-   ${TEST} ${SVN} cp ${SRC} ${DST} -m "${ROTOCI_VERSION}" --parents || 
-      ${TEST} ${SVN} cp ${SRC} ${DST} -m "${ROTOCI_VERSION}" --parents || 
+   ${TEST} ${SVN} cp ${SRC} ${DST} -m "${ROTOLRC_VERSION}" --parents || 
+      ${TEST} ${SVN} cp ${SRC} ${DST} -m "${ROTOLRC_VERSION}" --parents || 
       fatal "svn cp ${SRC} ${DST} failed"
 }
 
@@ -469,14 +469,14 @@ function importAndTagIt ()
    log "NEW_TAG=${NEW_TAG}"
    local SOURCE=${RELEASEDIR}/${RELEASE}/${NEW_TAG}
    local SRC=${REPOSITORY}/branches/${NEW_TAG}
-   ${SVN} ls ${SRC} 1>/dev/null 2>/dev/null && ${TEST} ${SVN} rm ${SRC} -m "${ROTOCI_VERSION}"
-   ${TEST} ${SVN} mkdir ${SRC} -m "${ROTOCI_VERSION}" --parents ||
-      ${TEST} ${SVN} mkdir ${SRC} -m "${ROTOCI_VERSION}" --parents ||
+   ${SVN} ls ${SRC} 1>/dev/null 2>/dev/null && ${TEST} ${SVN} rm ${SRC} -m "${ROTOLRC_VERSION}"
+   ${TEST} ${SVN} mkdir ${SRC} -m "${ROTOLRC_VERSION}" --parents ||
+      ${TEST} ${SVN} mkdir ${SRC} -m "${ROTOLRC_VERSION}" --parents ||
       fatal "svn mkdir ${SRC} failed"
-   ${TEST} ${SVN} import ${SOURCE} ${SRC} --no-ignore -m "${ROTOCI_VERSION}" || fatal "svn import ${SOURCE} ${SRC} failed"
+   ${TEST} ${SVN} import ${SOURCE} ${SRC} --no-ignore -m "${ROTOLRC_VERSION}" || fatal "svn import ${SOURCE} ${SRC} failed"
    local DST=${REPOSITORY}/tags/${NEW_TAG}
-   ${TEST} ${SVN} cp ${SRC} ${DST} -m "${ROTOCI_VERSION}" --parents || 
-      ${TEST} ${SVN} cp ${SRC} ${DST} -m "${ROTOCI_VERSION}" --parents || 
+   ${TEST} ${SVN} cp ${SRC} ${DST} -m "${ROTOLRC_VERSION}" --parents || 
+      ${TEST} ${SVN} cp ${SRC} ${DST} -m "${ROTOLRC_VERSION}" --parents || 
       fatal "svn cp ${SRC} ${DST} failed"
 }
 
@@ -651,7 +651,7 @@ function prepare_start()
    PS_CCS_BRANCH=`echo -e ${ECL_CCS} | sed "s/@.*//" | sed "s|[^/]*$|branches/rb_${RELEASE}|"`
    PS_MCU_BRANCH=`echo -e ${ECL_MCUHWAPI} | sed "s/@.*//" | sed "s|[^/]*$|branches/rb_${RELEASE}|"`
    PS_DSP_BRANCH=`echo -e ${ECL_UPHWAPI} | sed "s/@.*//" | sed "s|[^/]*$|branches/rb_${RELEASE}|"`
-   ROTOCI_VERSION=`${SVN} info ${WORKAREA} | grep ^URL | sed 's/.*\///'`
+   ROTOLRC_VERSION=`${SVN} info ${WORKAREA} | grep ^URL | sed 's/.*\///'`
 
    CONFIG_FILE=${RELEASEDIR}/${RELEASE}/config_${PROG}
    [ -r ${CONFIG_FILE} ] && source ${CONFIG_FILE}

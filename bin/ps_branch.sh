@@ -99,7 +99,7 @@ function local_process_cmd_line()
       [ "${BRANCHTIME}" ] && BRANCHTIME=`echo -e "{\"${BRANCHTIME}\"}" | sed 's/_/ /'`
    fi
 
-   ROTOCI_VERSION=`${SVN} info ${WORKAREA} | grep ^URL | sed 's/.*\///'`
+   ROTOLRC_VERSION=`${SVN} info ${WORKAREA} | grep ^URL | sed 's/.*\///'`
 }
 
 function printSource ()
@@ -123,11 +123,11 @@ function createBranchFromTag ()
    local SRC=${2}
    log "REPO: ${REPO}"
    log "SRC: ${SRC}"
-   ${TEST} ${SVN} rm ${REPO}/${NEWBRANCH} -m "${ROTOCI_VERSION}"
-   ${TEST} ${SVN} mkdir ${REPO}/${NEWBRANCH} -m "${ROTOCI_VERSION}" || fatal "svn mkdir ${REPO}/${NEWBRANCH} failed"
-   ${TEST} ${SVN} mkdir ${REPO}/${NEWBRANCH}/tags -m "${ROTOCI_VERSION}" || fatal "svn mkdir ${REPO}/${NEWBRANCH}/tags failed"
-   ${TEST} ${SVN} mkdir ${REPO}/${NEWBRANCH}/branches -m "${ROTOCI_VERSION}" || fatal "svn mkdir ${REPO}/${NEWBRANCH}/branches failed"
-   ${TEST} ${SVN} cp ${SVNSERVER}${SRC} ${REPO}/${NEWBRANCH}/trunk -m "${ROTOCI_VERSION}" || 
+   ${TEST} ${SVN} rm ${REPO}/${NEWBRANCH} -m "${ROTOLRC_VERSION}"
+   ${TEST} ${SVN} mkdir ${REPO}/${NEWBRANCH} -m "${ROTOLRC_VERSION}" || fatal "svn mkdir ${REPO}/${NEWBRANCH} failed"
+   ${TEST} ${SVN} mkdir ${REPO}/${NEWBRANCH}/tags -m "${ROTOLRC_VERSION}" || fatal "svn mkdir ${REPO}/${NEWBRANCH}/tags failed"
+   ${TEST} ${SVN} mkdir ${REPO}/${NEWBRANCH}/branches -m "${ROTOLRC_VERSION}" || fatal "svn mkdir ${REPO}/${NEWBRANCH}/branches failed"
+   ${TEST} ${SVN} cp ${SVNSERVER}${SRC} ${REPO}/${NEWBRANCH}/trunk -m "${ROTOLRC_VERSION}" || 
       fatal "svn cp ${SVNSERVER}${SRC} ${REPO}/${NEWBRANCH}/trunk failed"
 }
 
@@ -139,11 +139,11 @@ function createBranchFromTime ()
    log "BRANCHTIME: ${BRANCHTIME}"
 
    ${SVN} ls ${REPO}/${BASEBRANCH}/trunk 1>/dev/null 2>/dev/null || fatal "${REPO}/${BASEBRANCH}/trunk does not exist in subversion";
-   ${TEST} ${SVN} rm ${REPO}/${NEWBRANCH} -m "${ROTOCI_VERSION}"
-   ${TEST} ${SVN} mkdir ${REPO}/${NEWBRANCH} -m "${ROTOCI_VERSION}" || fatal "svn mkdir ${REPO}/${NEWBRANCH} failed"
-   ${TEST} ${SVN} mkdir ${REPO}/${NEWBRANCH}/tags -m "${ROTOCI_VERSION}" || fatal "svn mkdir ${REPO}/${NEWBRANCH}/tags failed"
-   ${TEST} ${SVN} mkdir ${REPO}/${NEWBRANCH}/branches -m "${ROTOCI_VERSION}" || fatal "svn mkdir ${REPO}/${NEWBRANCH}/branches failed"
-   ${TEST} eval "${SVN} cp -r ${BRANCHTIME} ${REPO}/${BASEBRANCH}/trunk ${REPO}/${NEWBRANCH}/trunk -m \"${ROTOCI_VERSION}\"" || 
+   ${TEST} ${SVN} rm ${REPO}/${NEWBRANCH} -m "${ROTOLRC_VERSION}"
+   ${TEST} ${SVN} mkdir ${REPO}/${NEWBRANCH} -m "${ROTOLRC_VERSION}" || fatal "svn mkdir ${REPO}/${NEWBRANCH} failed"
+   ${TEST} ${SVN} mkdir ${REPO}/${NEWBRANCH}/tags -m "${ROTOLRC_VERSION}" || fatal "svn mkdir ${REPO}/${NEWBRANCH}/tags failed"
+   ${TEST} ${SVN} mkdir ${REPO}/${NEWBRANCH}/branches -m "${ROTOLRC_VERSION}" || fatal "svn mkdir ${REPO}/${NEWBRANCH}/branches failed"
+   ${TEST} eval "${SVN} cp -r ${BRANCHTIME} ${REPO}/${BASEBRANCH}/trunk ${REPO}/${NEWBRANCH}/trunk -m \"${ROTOLRC_VERSION}\"" || 
       fatal "svn cp -r ${BRANCHTIME} ${REPO}/${BASEBRANCH}/trunk ${REPO}/${NEWBRANCH}/trunk failed"
 }
 
@@ -154,7 +154,7 @@ function createDummyRelease ()
       findPsRelRepo ${RELEASE}
       ${SVN} ls ${PSRELREPO}/branches/${RELEASE} 1>/dev/null 2>/dev/null || fatal "${PSRELREPO}/branches/${RELEASE} does not exist"
       ${SVN} ls ${PSRELREPO}/tags/${DUMMYRELEASE} 1>/dev/null 2>/dev/null && fatal "${PSRELREPO}/tags/${DUMMYRELEASE} does already exist"
-      ${TEST} ${SVN} cp ${PSRELREPO}/branches/${RELEASE} ${PSRELREPO}/tags/${DUMMYRELEASE} -m "${ROTOCI_VERSION}" --parents ||
+      ${TEST} ${SVN} cp ${PSRELREPO}/branches/${RELEASE} ${PSRELREPO}/tags/${DUMMYRELEASE} -m "${ROTOLRC_VERSION}" --parents ||
          fatal "svn cp ${PSRELREPO}/branches/${RELEASE} ${PSRELREPO}/tags/${DUMMYRELEASE} failed"
       log "${PSRELREPO}/tags/${DUMMYRELEASE} created"
    fi
@@ -250,7 +250,7 @@ function create_CI2RM ()
       fatal "cp ${RELEASEDIR}/${NEWBRANCH}/CI2RM ${RELEASEDIR}/${NEWBRANCH}/ci2rm/${NEWBRANCH}/CI2RM failed"
    cp ${RELEASEDIR}/${NEWBRANCH}/CI2RM_FastTrack ${RELEASEDIR}/${NEWBRANCH}/ci2rm/${NEWBRANCH}/CI2RM_FastTrack ||
       fatal "cp ${RELEASEDIR}/${NEWBRANCH}/CI2RM_FastTrack ${RELEASEDIR}/${NEWBRANCH}/ci2rm/${NEWBRANCH}/CI2RM_FastTrack failed"
-   ${TEST} ${SVN} import ${RELEASEDIR}/${NEWBRANCH}/ci2rm/${NEWBRANCH} ${SVNPS}/CI2RM/${NEWBRANCH} -m "${ROTOCI_VERSION}" ||
+   ${TEST} ${SVN} import ${RELEASEDIR}/${NEWBRANCH}/ci2rm/${NEWBRANCH} ${SVNPS}/CI2RM/${NEWBRANCH} -m "${ROTOLRC_VERSION}" ||
       fatal "import ${RELEASEDIR}/${NEWBRANCH}/ci2rm/${NEWBRANCH} to ${SVNPS}/CI2RM/${NEWBRANCH} failed"
    log "DONE"
 }
@@ -315,7 +315,7 @@ function create_ECL ()
    touch ${RELEASEDIR}/${NEWBRANCH}/ecl/${NEWBRANCH}/ECL_CCS/ECL
    mkdir -p ${RELEASEDIR}/${NEWBRANCH}/ecl/${NEWBRANCH}/ECL_HWAPI
    touch ${RELEASEDIR}/${NEWBRANCH}/ecl/${NEWBRANCH}/ECL_HWAPI/ECL
-   ${TEST} ${SVN} import ${RELEASEDIR}/${NEWBRANCH}/ecl/${NEWBRANCH} ${SVNPS}/ECL/${NEWBRANCH} -m "${ROTOCI_VERSION}" ||
+   ${TEST} ${SVN} import ${RELEASEDIR}/${NEWBRANCH}/ecl/${NEWBRANCH} ${SVNPS}/ECL/${NEWBRANCH} -m "${ROTOLRC_VERSION}" ||
       fatal "import ${RELEASEDIR}/${NEWBRANCH}/ecl/${NEWBRANCH} to ${SVNPS}/ECL/${NEWBRANCH} failed"
    log "DONE"
 }
