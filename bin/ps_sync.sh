@@ -53,8 +53,11 @@ ECL_REVISION=`${SVN} cat http://svne1.access.nsn.com/isource/svnroot/BTS_SCM_PS/
 if [ -z ${FAST} ]
 then 
 	echo "ECL update skipped, find the revision in BTS2LRC.txt"
-	NEW_ECL_REVISION=r${ECL_REVISION}
-	
+	source /var/fpwork/work/jenkins/workspace/workingDirSync/MAINBRANCH_LRC/ECL/BTS2LRC.txt
+	REVISION=`echo $ECL_REVISION | sed 's/.*@//'`
+	echo "REVISION=${REVISION}"
+	NEW_ECL_REVISION=r${REVISION}
+	echo "NEW_ECL_REVISION=${!NEW_ECL_REVISION}"
 	if [ -z ${!NEW_ECL_REVISION} ]
 	then 
 		echo "No such ECL revision" && exit 1
@@ -63,7 +66,7 @@ then
 
 	${SVN} export --force https://svne1.access.nsn.com/isource/svnroot/BTS_SCM_PS/CI2RM/MAINBRANCH_LRC/CI2RM${FAST} CI2RM/
 
-	sed -i "s/=.*/=${!NEW_ECL_REVISION}/" CI2RM/CI2RM${FAST}
+	sed -i "s/@.*/@${!NEW_ECL_REVISION}/" CI2RM/CI2RM${FAST}
 	sed -i "s/BTS/LRC/" CI2RM/CI2RM${FAST}
 
 	NEW_CI2RM_REVISION=`${SVN} commit CI2RM/CI2RM${FAST} -m "CI2RM${FAST} automatical update"`
@@ -111,7 +114,8 @@ echo "ECL updated: ${RET}"
 
 NEW_ECL_REVISION=`echo "$RET" | grep "Committed revision" | sed 's/.*Committed revision //' | sed 's/\.//'`
 
-echo "r${ECL_REVISION}=${NEW_ECL_REVISION}" >> /var/fpwork/work/jenkins/workspace/workingDirSync/MAINBRANCH_LRC/ECL/BTS2LRC.txt
+REVISION=`echo ${ECL_REVISION} | sed 's/.*@//'`
+echo "r${REVISION}=${NEW_ECL_REVISION}" >> /var/fpwork/work/jenkins/workspace/workingDirSync/MAINBRANCH_LRC/ECL/BTS2LRC.txt
 
 ${SVN} checkout http://beisop60.china.nsn-net.net/isource/svnroot/LRC_SCM_PS/CI2RM/MAINBRANCH_LRC/ CI2RM
 
