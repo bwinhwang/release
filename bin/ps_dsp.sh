@@ -440,7 +440,7 @@ PS SCM"
 function check_dsp ()
 {
    log "STARTED"
-   local DSP_FILE=${RELEASEDIR}/${RELEASE}/config_ps_ROTOLRC_dsp.sh
+local DSP_FILE=${RELEASEDIR}/${RELEASE}/config_ps_rotolrc_dsp.sh
    while [ ! -r "${DSP_FILE}" ]; do
       log "waiting for ${DSP_FILE}"
       sleep 60
@@ -458,7 +458,7 @@ function check_dsp ()
 
 function check_dsp_completed ()
 {
-   local DSP_FILE=${RELEASEDIR}/${RELEASE}/fctptr_ps_ROTOLRC_dsp.sh
+local DSP_FILE=${RELEASEDIR}/${RELEASE}/fctptr_ps_rotolrc_dsp.sh
    grep completed ${DSP_FILE} > /dev/null
    while [ "$?" != "0" ]; do
       log "waiting for DSP completed"

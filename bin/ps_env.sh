@@ -316,7 +316,7 @@ PS SCM"
 function check_env ()
 {
    log "STARTED"
-   local ENV_FILE=${RELEASEDIR}/${RELEASE}/config_ps_ROTOLRC_env.sh
+local ENV_FILE=${RELEASEDIR}/${RELEASE}/config_ps_rotolrc_env.sh
    while [ ! -r "${ENV_FILE}" ]; do
       log "waiting for ${ENV_FILE}"
       sleep 60
@@ -329,7 +329,7 @@ function check_env ()
 
 function check_env_completed ()
 {
-   local ENV_FILE=${RELEASEDIR}/${RELEASE}/fctptr_ps_ROTOLRC_env.sh
+local ENV_FILE=${RELEASEDIR}/${RELEASE}/fctptr_ps_rotolrc_env.sh
    grep completed ${ENV_FILE} > /dev/null
    while [ "$?" != "0" ]; do
       log "waiting for ENV completed"

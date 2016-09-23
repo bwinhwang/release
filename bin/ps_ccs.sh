@@ -340,7 +340,7 @@ PS SCM"
 function check_ccs ()
 {
    log "STARTED"
-   local CCS_FILE=${RELEASEDIR}/${RELEASE}/config_ps_ROTOLRC_ccs.sh
+local CCS_FILE=${RELEASEDIR}/${RELEASE}/config_ps_rotolrc_ccs.sh
    while [ ! -r "${CCS_FILE}" ]; do 
       log "waiting for ${CCS_FILE}"
       sleep 60
@@ -358,7 +358,7 @@ function check_ccs ()
 
 function check_ccs_completed ()
 {
-   local CCS_FILE=${RELEASEDIR}/${RELEASE}/fctptr_ps_ROTOLRC_ccs.sh
+local CCS_FILE=${RELEASEDIR}/${RELEASE}/fctptr_ps_rotolrc_ccs.sh
    grep completed ${CCS_FILE} > /dev/null
    while [ "$?" != "0" ]; do
       log "waiting for CCS completed"

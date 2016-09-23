@@ -356,7 +356,7 @@ PS SCM"
 function check_mcu ()
 {
    log "STARTED"
-   local MCU_FILE=${RELEASEDIR}/${RELEASE}/config_ps_ROTOLRC_mcu.sh
+local MCU_FILE=${RELEASEDIR}/${RELEASE}/config_ps_rotolrc_mcu.sh
    while [ ! -r "${MCU_FILE}" ]; do
       log "waiting for ${MCU_FILE}"
       sleep 60
@@ -374,7 +374,7 @@ function check_mcu ()
 
 function check_mcu_completed ()
 {
-   local MCU_FILE=${RELEASEDIR}/${RELEASE}/fctptr_ps_ROTOLRC_mcu.sh
+local MCU_FILE=${RELEASEDIR}/${RELEASE}/fctptr_ps_rotolrc_mcu.sh
    grep completed ${MCU_FILE} > /dev/null
    while [ "$?" != "0" ]; do
       log "waiting for MCU completed"
