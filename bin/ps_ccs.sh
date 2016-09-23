@@ -240,9 +240,9 @@ function create_output_files_ccs_sw ()
       local TIME_NOW=`date +%H:%M:%SZ -u`
       create_xml_file_ccs_sw
       local REVISIONNUMBER=`echo -e ${CI2RM_CCS} | sed "s/.*_//" | sed "s/.zip//"`
-      mysql --host="ulccsdb01.emea.nsn-net.net" --user="ccsweb" --password="f236b6ba" PS_CI_RELEASES 2>&1 <<EOF
-update Promotions SET  ccstag="${NEW_PS_CCS_SW}" where branch="${BRANCH}" and revision="${REVISIONNUMBER}"
-EOF
+#      mysql --host="ulccsdb01.emea.nsn-net.net" --user="ccsweb" --password="f236b6ba" PS_CI_RELEASES 2>&1 <<EOF
+#update Promotions SET  ccstag="${NEW_PS_CCS_SW}" where branch="${BRANCH}" and revision="${REVISIONNUMBER}"
+#EOF
    fi
    log "DONE"
 }
