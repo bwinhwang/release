@@ -270,6 +270,7 @@ function triggerWft ()
       RET=`${TEST} curl -s -k ${WFT_API}/xml_validate -F "access_key=${WFT_KEY}" -F "file=@${RELNOTEXML}"`
       [[ "${RET}" =~ "XML valid" ]] || fatal "curl validation failed: ${RELNOTEXML} not valid: ${RET}"
       log "curl validation successful for ${NEW}"
+    log "WFT import skipped" && return 0
       if [ -z ${TEST} ]; then
          if [ "${TESTING}" ]; then
             RET=`${TEST} curl -k ${WFT_API}/xml -F "access_key=${WFT_KEY}" -F "file=@${RELNOTEXML}" -F "testing=yes"`
