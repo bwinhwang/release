@@ -136,7 +136,7 @@ function create_information_file_mcu_build ()
    log "RELNOTEINFO:${RELNOTEINFO}"
    log "DELIVERY_BASELINE:${DELIVERY_BASELINE}"
    log "SW_BASELINE:${SW_BASELINE}"
-   local VERSIONSTRING=`echo -e "Version string: BTS_SC_MCUHWAPI_${BRANCH}-trunk@"``echo -e ${ECL_MCUHWAPI} | sed "s/.*@//"`
+   local VERSIONSTRING=`echo -e "Version string: LRC_SC_MCUHWAPI_${BRANCH}-trunk@"``echo -e ${ECL_MCUHWAPI} | sed "s/.*@//"`
    echo "${VERSIONSTRING}" > ${RELNOTEINFO}
    echo "" >> ${RELNOTEINFO}
    echo "" >> ${RELNOTEINFO}

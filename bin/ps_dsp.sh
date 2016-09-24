@@ -166,7 +166,7 @@ function create_information_file_dsp_build ()
    log "RELNOTEINFO:${RELNOTEINFO}"
    log "DELIVERY_BASELINE:${DELIVERY_BASELINE}"
    log "SW_BASELINE:${SW_BASELINE}"
-   local VERSIONSTRING=`echo -e "Version string: BTS_SC_DSPHWAPI_${BRANCH}-trunk@"``echo -e ${ECL_UPHWAPI} | sed "s/.*@//"`
+   local VERSIONSTRING=`echo -e "Version string: LRC_SC_UPHWAPI_${BRANCH}-trunk@"``echo -e ${ECL_UPHWAPI} | sed "s/.*@//"`
    echo "${VERSIONSTRING}" > ${RELNOTEINFO}
    echo " " >> ${RELNOTEINFO}
    echo "Notes for changes in DSPHWAPI_BUILD regarding Common Tools, Faraday and Nyquist 
@@ -192,53 +192,6 @@ function branch_dsp_sw ()
    log "DONE"
 }
 
-function create_externals_dsp_sw ()
-{
-   log "STARTED"
-   echo FCT_PTR=${FCT_PTR} > ${FCT_PTR_FILE}
-   local SRC=${SVNSERVER}${PS_DSP_BRANCH}
-   if [[ "`${SVN} pg svn:externals ${SRC} | wc -l`" != "0" ]]; then 
-      # only for old branches with externals
-      local FILE=${RELEASEDIR}/${RELEASE}/dsp_sw_externals.txt
-      local DST=${RELEASEDIR}/${RELEASE}/branch_dsp
-   
-      echo "/isource/svnroot/BTS_T_PS_TOOLS/Tools/common/pyparsing-1.5.5 Tools/common/pyparsing-1.5.5" > ${FILE}
-      echo "" >> ${FILE}
-      echo "/isource/svnroot/BTS_T_PS_SWBUILD/tags/${ECL_SWBUILD}/SwBuild/common SwBuild/common" >> ${FILE}
-      echo "/isource/svnroot/BTS_T_PS_SWBUILD/tags/${ECL_SWBUILD}/SwBuild/Definitions SwBuild/Definitions" >> ${FILE}
-      echo "/isource/svnroot/BTS_T_PS_SWBUILD/tags/${ECL_SWBUILD}/SwBuild/doc SwBuild/doc" >> ${FILE}
-      echo "/isource/svnroot/BTS_T_PS_SWBUILD/tags/${ECL_SWBUILD}/SwBuild/user SwBuild/user" >> ${FILE}
-      echo "/isource/svnroot/BTS_T_BGT/tags/${ECL_DSP_BGT}/Tools/DspHwapiPacketingTools Tools/DspHwapiPacketingTools" >> ${FILE}
-      echo "" >> ${FILE}
-      echo "/isource/svnroot/BTS_T_TI_CGT/tags/${ECL_TI_CGT_FSPB}/ccs_faraday/C6000/cgtools ccs_faraday/C6000/cgtools" >> ${FILE}
-      echo "/isource/svnroot/BTS_E_TI_CSL/tags/${ECL_TI_CSL_FSPB}/ccs_faraday/C6000/csl_faraday ccs_faraday/C6000/csl_faraday" >> ${FILE}
-      echo "/isource/svnroot/BTS_E_TI_DCI/tags/${ECL_TI_DCI_FSPB}/ccs_faraday/C6000/dci ccs_faraday/C6000/dci" >> ${FILE}
-      echo "/isource/svnroot/BTS_E_TI_AET/tags/${ECL_TI_AET_FSPB}/ccs_faraday/C6000/aet ccs_faraday/C6000/aet" >> ${FILE}
-      echo "/isource/svnroot/BTS_E_OSE_CK/tags/${ECL_OSECK_4}/ose4xx ose4xx" >> ${FILE}
-      echo "" >> ${FILE}
-      echo "/isource/svnroot/BTS_T_TI_CGT/tags/${ECL_TI_CGT_NYQUIST}/ccs_nyquist/C6000/cgtools ccs_nyquist/C6000/cgtools" >> ${FILE}
-      echo "/isource/svnroot/BTS_E_TI_AET/tags/${ECL_TI_AET_NYQUIST}/ccs_nyquist/C6000/aet ccs_nyquist/C6000/aet" >> ${FILE}
-      echo "/isource/svnroot/BTS_T_TI_NYQUIST_PDK/tags/${ECL_TI_NYQUIST_PDK}/T_Tools/ccs_nyquist/packages ccs_nyquist/packages" >> ${FILE}
-      echo "/isource/svnroot/BTS_E_OSE_CK/tags/${ECL_OSECK_4_1_NY}/ose41x_n ose41x_n" >> ${FILE}
-      echo "" >> ${FILE}
-      echo "/isource/svnroot/BTS_I_GLOBAL/tags/${ECL_GLOBAL_ENV}/I_Interface/Global_Env I_Interface/Global_Env" >> ${FILE}
-      echo "/isource/svnroot/BTS_I_PS/${NEW_BRANCH_PS_ENV}/tags/${NEW_PS_ENV}/I_Interface/Platform_Env/Messages I_Interface/Platform_Env/Messages" >> ${FILE}
-      echo "/isource/svnroot/BTS_I_PS/${NEW_BRANCH_PS_ENV}/tags/${NEW_PS_ENV}/I_Interface/Platform_Env/Definitions I_Interface/Platform_Env/Definitions" >> ${FILE}
-      echo "/isource/svnroot/BTS_I_PS/${NEW_BRANCH_PS_ENV}/tags/${NEW_PS_ENV}/I_Interface/Platform_Env/CCS_ENV I_Interface/Platform_Env/CCS_ENV" >> ${FILE}
-      echo "" >> ${FILE}
-      echo "/isource/svnroot/BTS_SC_CCS/${NEW_BRANCH_PS_CCS_SW}/tags/${NEW_PS_CCS_SW}/CCS_COTS CCS_COTS" >> ${FILE}
-      echo "/isource/svnroot/BTS_SC_CCS/${NEW_BRANCH_PS_CCS_SW}/tags/${NEW_PS_CCS_SW}/CCS_Daemon CCS_Daemon" >> ${FILE}
-      echo "/isource/svnroot/BTS_SC_CCS/${NEW_BRANCH_PS_CCS_SW}/tags/${NEW_PS_CCS_SW}/CCS_Services CCS_Services" >> ${FILE}
-      echo "/isource/svnroot/BTS_SC_CCS/${NEW_BRANCH_PS_CCS_SW}/tags/${NEW_PS_CCS_SW}/CCS_TestCases CCS_TestCases" >> ${FILE}
-      echo "" >> ${FILE}
-      echo "/isource/svnroot/BTS_SC_MCUHWAPI/${NEW_BRANCH_PS_MCU_SW}/tags/${NEW_PS_MCU_SW}/HWR/Mit Tools/common/Mit" >> ${FILE}
-   
-      ${SVN} co --non-recursive ${SRC} ${DST}
-      ${SVN} propset svn:externals ${DST} -F ${FILE} || fatal "set properties 'svn:externals' failed for ${DST}"
-      ${SVN} ci -m "${ROTOLRC_VERSION}" ${DST} || fatal "svn ci failed"
-   fi
-   log "DONE"
-}
 
 function define_dsp_sw ()
 {
