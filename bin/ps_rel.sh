@@ -555,7 +555,7 @@ function create_ci2rm()
    log "STARTED"
    echo FCT_PTR=${FCT_PTR} > ${FCT_PTR_FILE}
    local FNAME=CI2RM
-   local FILE=${RELEASEDIR}/${RELEASE}/CI2RM_ps_ROTOLRC_psrel.sh
+   local FILE=${RELEASEDIR}/${RELEASE}/CI2RM_ps_rotolrc_psrel.sh
    local PS_REL_DST="${RELEASEPSRELREPO}/branches/${RELEASE}"
    ${TEST} ${SVN} import ${FILE} ${PS_REL_DST}/${FNAME} -m "${ROTOLRC_VERSION}" || fatal "import ${FILE} to ${PS_REL_DST}/${FNAME} failed"
    log "DONE"
@@ -566,7 +566,7 @@ function create_ecl()
    log "STARTED"
    echo FCT_PTR=${FCT_PTR} > ${FCT_PTR_FILE}
    local FNAME=ECL
-   local FILE=${RELEASEDIR}/${RELEASE}/ECL_ps_ROTOLRC_psrel.sh
+   local FILE=${RELEASEDIR}/${RELEASE}/ECL_ps_rotolrc_psrel.sh
    local PS_REL_DST="${RELEASEPSRELREPO}/branches/${RELEASE}"
    ${TEST} ${SVN} import ${FILE} ${PS_REL_DST}/${FNAME} -m "${ROTOLRC_VERSION}" || fatal "import ${FILE} to ${PS_REL_DST}/${FNAME} failed"
    log "DONE"
@@ -718,8 +718,8 @@ function trigger_wft_psrel()
       local CI2RMFILE=${RELEASEDIR}/${RELEASE}/CI2RM.txt
       local ECLFILE=${RELEASEDIR}/${RELEASE}/ECL.txt
       local PARTLIST=${RELEASEDIR}/${RELEASE}/PSREL_partlist.txt
-      cp ${RELEASEDIR}/${RELEASE}/CI2RM_ps_ROTOLRC_psrel.sh ${CI2RMFILE}
-      cp ${RELEASEDIR}/${RELEASE}/ECL_ps_ROTOLRC_psrel.sh ${ECLFILE}
+      cp ${RELEASEDIR}/${RELEASE}/CI2RM_ps_rotolrc_psrel.sh ${CI2RMFILE}
+      cp ${RELEASEDIR}/${RELEASE}/ECL_ps_rotolrc_psrel.sh ${ECLFILE}
       curl -k ${WFT_PORT}/builds/${RELEASE} -F "access_key=${WFT_KEY}" -F "build[repository_url]=${RELEASEPSRELREPO}" -X PUT
       curl -k ${WFT_PORT}/builds/${RELEASE} -F "access_key=${WFT_KEY}" -F "build[repository_branch]=tags/${RELEASE}" -X PUT
       curl -k ${WFT_PORT}/builds/${RELEASE} -F "access_key=${WFT_KEY}" -F "build[important_note]=" -X PUT  # remove Important Note
