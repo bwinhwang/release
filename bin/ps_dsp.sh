@@ -348,8 +348,10 @@ ${BWFILES}"
       SUB="DSPHWAPI Release ${NEW_PS_DSP_BUILD} is ready ${FORSCT}for ${RELEASE}"
       FROM="scm-ps-prod@mlist.emea.nsn-intra.net"
       REPLYTO="scm-ps-prod@mlist.emea.nsn-intra.net"
-      TO="scm-ps-int@mlist.emea.nsn-intra.net"
-      CC="scm-ps-prod@mlist.emea.nsn-intra.net"
+    #      TO="scm-ps-int@mlist.emea.nsn-intra.net"
+    #      CC="scm-ps-prod@mlist.emea.nsn-intra.net"
+          TO="binhwang@nokia.com"
+          CC="I_MN_P_BBP_SCM_HZ_PS@internal.nsn.com"
       MSG="Dear Colleagues,
 
 The DSPHWAPI release ${NEW_PS_DSP_BUILD} is now available. Target PS release: ${RELEASE}

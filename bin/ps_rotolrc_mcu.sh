@@ -46,7 +46,7 @@ function call_function ()
       create_output_files_mcu_sw )    create_output_files_mcu_sw;    FCT_PTR="trigger_wft_mcu_sw";; 
       trigger_wft_mcu_sw )            trigger_wft_mcu_sw;            FCT_PTR="create_output_files_mcu_build";;
       create_output_files_mcu_build ) create_output_files_mcu_build; FCT_PTR="trigger_wft_mcu_build";; 
-      trigger_wft_mcu_build )         trigger_wft_mcu_build;         FCT_PTR="completed";;
+      trigger_wft_mcu_build )         trigger_wft_mcu_build;         FCT_PTR="send_mail_mcu";;
       send_mail_mcu )                 send_mail_mcu;                 FCT_PTR="completed";;
       completed)                      completed;                     FCT_PTR="END";;
       *)                              fatal "No correct entry point defined"

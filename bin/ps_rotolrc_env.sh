@@ -44,7 +44,7 @@ function call_function ()
       define_env )                   define_env;                  FCT_PTR="tag_env";;
       tag_env )                      tag_env;                     FCT_PTR="create_output_files_env";;
       create_output_files_env )      create_output_files_env;     FCT_PTR="trigger_wft_env";; 
-      trigger_wft_env )              trigger_wft_env;             FCT_PTR="completed";;
+      trigger_wft_env )              trigger_wft_env;             FCT_PTR="send_mail_env";;
       send_mail_env )                send_mail_env;               FCT_PTR="completed";;
       completed)                     completed;                   FCT_PTR="END";;
       *)                             fatal "No correct entry point defined"
