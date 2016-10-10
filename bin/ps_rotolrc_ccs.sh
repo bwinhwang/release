@@ -43,7 +43,7 @@ function call_function ()
       tag_ccs_sw )                    tag_ccs_sw;                    FCT_PTR="define_ccs_build";;
       define_ccs_build )              define_ccs_build;              FCT_PTR="tag_ccs_build";;
       tag_ccs_build )                 tag_ccs_build;                 FCT_PTR="create_output_files_ccs_sw";;
-      create_output_files_ccs_sw )    create_output_files_ccs_sw;    FCT_PTR="trigger_wft_ccs_build";; 
+      create_output_files_ccs_sw )    create_output_files_ccs_sw;    FCT_PTR="trigger_wft_ccs_sw";; 
       trigger_wft_ccs_sw )            trigger_wft_ccs_sw;            FCT_PTR="create_output_files_ccs_build";;
       create_output_files_ccs_build ) create_output_files_ccs_build; FCT_PTR="trigger_wft_ccs_build";; 
       trigger_wft_ccs_build )         trigger_wft_ccs_build;         FCT_PTR="send_mail_ccs";;
