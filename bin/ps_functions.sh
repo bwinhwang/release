@@ -135,7 +135,7 @@ function findLfsRelRepo ()
    [[ "${LFSRELEASE}" =~ $REG0 ]] || fatal "LFS RELEASE malformed"
    LFSRELREPO=$(echo ${LFSRELEASE} | sed -r -e 's/^.*PS_LFS_REL_([^_]+)_([^_]+)_.*$/BTS_D_SC_LFS_\1_\2/')
    log "${SVN} ls ${LFSSERVER}/${LFSRELREPO}/tags"
-   ${SVN} ls ${SVNURL}/${LFSRELREPO}/tags > ${FILE} || fatal "${SVNURL}/${LFSRELREPO}/tags not accessible"
+   ${SVN} ls ${SVNPSREPOURL}/${LFSRELREPO}/tags > ${FILE} || fatal "${SVNPSREPOURL}/${LFSRELREPO}/tags not accessible"
    grep "^${LFSRELEASE}" ${FILE} || LFSRELREPO=BTS_D_SC_LFS
    log "LFSRELREPO: ${LFSRELREPO}"
 }
