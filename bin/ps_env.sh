@@ -294,10 +294,8 @@ function send_mail_env ()
       SUB="PS_ENV Release ${NEW_PS_ENV} is ready for ${RELEASE}"
       FROM="scm-ps-prod@mlist.emea.nsn-intra.net"
       REPLYTO="scm-ps-prod@mlist.emea.nsn-intra.net"
-    #      TO="scm-ps-int@mlist.emea.nsn-intra.net"
-    #      CC="scm-ps-prod@mlist.emea.nsn-intra.net"
-          TO="binhwang@nokia.com"
-          CC="I_MN_P_BBP_SCM_HZ_PS@internal.nsn.com"
+      TO="scm-ps-int@mlist.emea.nsn-intra.net"
+      CC="scm-ps-prod@mlist.emea.nsn-intra.net"
       MSG="Dear Colleagues,
 
 The PS_ENV release ${NEW_PS_ENV} is now available. Target PS release: ${RELEASE}

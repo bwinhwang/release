@@ -89,7 +89,8 @@ if (( $message_body !~ " " ) && ( $message_body !~ "\n" )) {
 }
 
 # smtp server
-my $mail_host = 'mail.emea.nsn-intra.net';
+#my $mail_host = 'mail.emea.nsn-intra.net';
+my $mail_host = 'mailrelay.int.nokia.com';
 
 print "Sending to: $to_address\n";
 print "Sending cc: $cc_address\n";

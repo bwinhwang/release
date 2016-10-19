@@ -303,10 +303,8 @@ function send_mail_ccs ()
       SUB="CCS Release ${NEW_PS_CCS_BUILD} is ready ${FORSCT}for ${RELEASE}"
       FROM="scm-ps-prod@mlist.emea.nsn-intra.net"
       REPLYTO="scm-ps-prod@mlist.emea.nsn-intra.net"
-    #      TO="scm-ps-int@mlist.emea.nsn-intra.net"
-    #      CC="scm-ps-prod@mlist.emea.nsn-intra.net"
-		TO="binhwang@nokia.com"
-      CC="I_MN_P_BBP_SCM_HZ_PS@internal.nsn.com"
+      TO="scm-ps-int@mlist.emea.nsn-intra.net"
+      CC="scm-ps-prod@mlist.emea.nsn-intra.net"
       MSG="Dear Colleagues,
 
 The CCS release ${NEW_PS_CCS_BUILD} is now available. Target PS release: ${RELEASE}
