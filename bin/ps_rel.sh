@@ -659,8 +659,6 @@ function trigger_wft_psrel()
 {
    log "STARTED"
    echo FCT_PTR=${FCT_PTR} > ${FCT_PTR_FILE}
-log "trigger_wft_psrel is skipped"
-log "DONE" && return 0
    if [ -z ${TEST} ]; then
       mapBranchName ${BRANCH}    # ret: BRANCH_FOR
       local SUB_BUILD=
